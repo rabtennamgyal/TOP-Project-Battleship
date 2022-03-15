@@ -1,8 +1,8 @@
-const Ship = require('../modules/shipfactory');
+const Ship = require('../modules/factories/shipfactory');
 
 // 🚢 Ship Test
 
-test('Does it push the number to the array', () => {
+test('Does it push the number in the array', () => {
     const Ship1 = new Ship(1, false);
     const arr = Ship1.marked;
     Ship1.hit(1);
@@ -11,7 +11,7 @@ test('Does it push the number to the array', () => {
 });
 
 test('Is the ship sunked ?', () => {
-    const Ship1 = new Ship(3, false);
+    const Ship1 = new Ship('destroyer', 3, false);
     Ship1.hit(1);
     Ship1.hit(2);
     Ship1.hit(3);

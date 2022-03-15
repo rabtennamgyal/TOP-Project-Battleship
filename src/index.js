@@ -3,4 +3,5 @@ import './sass/main.scss';
 
 
 // 🤖 Modules
-import './modules/factory';
+import domutil from './modules/util/domutil';
+import View from './modules/View';

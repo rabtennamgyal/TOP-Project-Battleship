@@ -1,0 +1,83 @@
+.container {
+    position: relative;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 10% 70% 20%;
+
+    .navbar {
+        height: 100%;
+        width: 100%;
+        grid-column: 1 / 4;
+        display: grid;
+        place-items: center;
+
+        h1 {
+            color: #fff;
+            font-size: 3rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    }
+
+    .box {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        place-content: center;
+
+        .gameBoard {
+            height: 60vh;
+            width: 30vw;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(10, 1fr);
+
+            .grid {
+                z-index: 100;
+                cursor: pointer;
+                border: .1px solid #ffffff;
+                background: #22aeff;
+            }
+        }
+
+        .pos {
+            border: solid red;
+        }
+    }
+
+    .ShipContainer {
+        height: 100%;
+        //border: solid #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        .ship {
+            height: 28%;
+            display: flex;
+            background: #41ffb0;
+
+            .shipBox {
+                cursor: move;
+                border: .1px solid #000000;
+                height: 100%;
+                width: 3.8rem;
+            }
+        }
+    }
+
+    #boxOne {
+        grid-column: 1 / 2;
+    }
+
+    #boxTwo {
+        grid-column: 2 / 3;
+    }
+
+    #boxThree {
+        grid-column: 1 / 4;
+        grid-row: 3 / 3;
+    }
+}
