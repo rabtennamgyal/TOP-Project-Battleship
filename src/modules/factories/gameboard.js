@@ -18,8 +18,7 @@ function GameBoard() {
     
     // 2. Place Ships in the board
     const placeShip = (start, length, name) => {
-        // // use this when the direction is x-axis.
-        // start, length, name
+        // Take the already created ship as an argument and place it in an array. 
         if (length === 2) {
             board.splice(start, length, name, name);
         } else if (length === 3) {
@@ -28,8 +27,7 @@ function GameBoard() {
             board.splice(start, length, name, name, name, name);
         } else if (length === 5) {
             board.splice(start, length, name, name, name, name, name);
-        }
-
+        };
     };
 
     // 3. Receive Attack 

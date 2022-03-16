@@ -1,4 +1,4 @@
-import { changeBasis } from './util/domutil';
+import { changeBasisX, changeBasisY } from './util/domutil';
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
@@ -6,6 +6,13 @@ const grids = document.querySelectorAll('.grid');
 const directionBtn = document.getElementById('changeDirection');
 
 let currentDirection = 'X';
+let shipindex = {
+    'destroyer': false,
+    'cruiser': false,
+    'submarine': false,
+    'battleship': false,
+    'carrier': false
+}
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
@@ -38,17 +45,16 @@ function changeDirection() {
 }
 
 
+// 1. this function should also take care of creating the ships.
+// a. should also check if a ship is already placed on a certain index.
 function shipPlacement(e, length) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
 
     const arr = []; // make sure the first number >= 0 && last number <= 99.
-    console.log(`${index}: index`);
 
     if (currentDirection === 'X') {
-        let length = 4;
-        // add + length - 1
-        const position = changeBasis(index);
+        const position = changeBasisX(index);
 
         if (length === 2 && position + length <= 10) {
             arr.push(index, index + 1);
@@ -62,8 +68,6 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-
-            newBoard.placeShip(arr[0], length, destroyer.name);
         } else if (length === 3 && position + length <= 10) {
             arr.push(index, index + 1, index + 2);
             const divs = Array.from(grids);
@@ -100,18 +104,13 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-
-            newBoard.placeShip(arr[0], length, carrier.name);
         }
-    } 
+    };
 
     if (currentDirection === 'Y') {
-        let length = 5;
-        // add + 10
-        const position = changeBasis(index);
-        console.log(position)
+        const position = changeBasisY(index);
 
-        if (length === 2) {
+        if (length === 2 && position + length <= 82) {
             arr.push(index, index + 10);
             const divs = Array.from(grids);
             const curDivs = [];
@@ -123,7 +122,7 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-        } else if (length === 3) {
+        } else if (length === 3 && position + length <= 73) {
             arr.push(index, index + 10, index + 20);
             const divs = Array.from(grids);
             const curDivs = [];
@@ -135,7 +134,7 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-        } else if (length === 4) {
+        } else if (length === 4 && position + length <= 64) {
             arr.push(index, index + 10, index + 20, index + 30);
             const divs = Array.from(grids);
             const curDivs = [];
@@ -147,7 +146,7 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-        } else if (length === 5) {
+        } else if (length === 5 && position + length <= 55) {
             arr.push(index, index + 10, index + 20, index + 30, index + 40);
             const divs = Array.from(grids);
             const curDivs = [];
@@ -159,11 +158,15 @@ function shipPlacement(e, length) {
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
             });
-        }
+        };
+    };
+};
 
-        console.log(arr);
-    }
-}
+
+function setShip() {
+    
+};
+
 
 
 function attack(e) {
@@ -213,7 +216,8 @@ function attack(e) {
 // Event Listeners 
 
 grids.forEach(el => {
-    el.addEventListener('click', shipPlacement);
+    el.addEventListener('click', (e) => {
+    });
 });
 
 directionBtn.addEventListener('click', changeDirection);

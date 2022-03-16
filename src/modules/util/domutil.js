@@ -1,4 +1,3 @@
-const ships = document.querySelectorAll('.ship');
 const grids = document.querySelectorAll('.grid');
 
 let currentShipLength;
@@ -11,27 +10,51 @@ grids.forEach(el => {
 });
 
 // Change the Ship's direction between x-axis and y-axis.
-function changeBasis(num) {
+function changeBasisX(num) {
     if (num < 10) {
         return num;
-    } else if (num > 10 && num < 20) {
+    } else if (num >= 10 && num < 20) {
         return num - 10;
-    } else if (num > 20 && num < 30) {
+    } else if (num >= 20 && num < 30) {
         return num - 20;
-    } else if (num > 30 && num < 40) {
+    } else if (num >= 30 && num < 40) {
         return num - 30;
-    } else if (num > 40 && num < 50) {
+    } else if (num >= 40 && num < 50) {
         return num - 40;
-    } else if (num > 50 && num < 60) {
+    } else if (num >= 50 && num < 60) {
         return num - 50;
-    } else if (num > 60 && num < 70) {
+    } else if (num >= 60 && num < 70) {
         return num - 60;
-    } else if (num > 70 && num < 80) {
+    } else if (num >= 70 && num < 80) {
         return num - 70;
-    } else if (num > 80 && num < 90) {
+    } else if (num >= 80 && num < 90) {
         return num - 80;
-    } else if (num > 90 && num < 100) {
+    } else if (num >= 90 && num < 100) {
         return num - 90;
+    };
+};
+
+function changeBasisY(num) {
+    if (num >= 0 && num < 10) {
+        return num - num;
+    } else if (num >= 10 && num < 20) {
+        return (num - (num - 10));
+    } else if (num >= 20 && num < 30) {
+        return (num - (num - 20));
+    } else if (num >= 30 && num < 40) {
+        return (num - (num - 30));
+    } else if (num >= 40 && num < 50) {
+        return (num - (num - 40));
+    } else if (num >= 50 && num < 60) {
+        return (num - (num - 50));
+    } else if (num >= 60 && num < 70) {
+        return (num - (num - 60));
+    } else if (num >= 70 && num < 80) {
+        return (num - (num - 70));
+    } else if (num >= 80 && num < 90) {
+        return (num - (num - 80));
+    } else if (num >= 90 && num < 100) {
+        return (num - (num - 90));
     }
 };
 
@@ -88,7 +111,7 @@ grids.forEach(el => {
 
 
 
-export { changeBasis };
+export { changeBasisX, changeBasisY };
 // Find the length of the current ship (dom element) in order to use it as a logic to place on the dom board.
 // ships.forEach(el => {
 //     el.addEventListener('dragstart', (e) => {
@@ -103,5 +126,3 @@ export { changeBasis };
 //         }
 //     });
 // });
-
-
