@@ -7,6 +7,7 @@ const directionBtn = document.getElementById('changeDirection');
 
 let currentDirection = 'X';
 let foo = 'destroyer';
+let count = 0; // move from destroyer & submarine to cruiser. 
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
@@ -45,7 +46,7 @@ function shipPlacement(e, length) {
     if (currentDirection === 'X') {
         const position = changeBasisX(index);
 
-        if (length === 2 && position + length <= 10) {
+        if (length === 2 && position + length <= 10 && foo === 'destroyer' || foo === 'submarine') {
             const one = index;
             const two = index + 1;
             
@@ -65,6 +66,11 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 newBoard.placeShip(index, length, destroyer.name, destroyer.name);
+                count++;
+
+                if (count === 2) {
+                    foo = 'cruiser';
+                }
             }
         } else if (length === 3 && position + length <= 10) {
             const one = index; 
@@ -87,6 +93,9 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+                foo = 'battleship';
+                console.log(foo);
+                console.log(board);
             }
         } else if (length === 4 && position + length <= 10) {
             const one = index;
@@ -110,6 +119,9 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+                foo = 'carrier';
+                console.log(foo);
+                console.log(board);
             }
         } else if (length === 5 && position + length <= 10) {
             const one = index; 
@@ -134,6 +146,8 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+                console.log(foo);
+                console.log(board);
             }
         } 
     };
@@ -197,30 +211,18 @@ function shipPlacement(e, length) {
 function setShips(e) {
     if (foo === 'destroyer') {
         shipPlacement(e, 2);
-        setTimeout(() => { // this code need to be invoked when the ship is actually placed.
-            foo = 'submarine';
-        }, 100);
     }
 
     if (foo === 'submarine') {
         shipPlacement(e, 2);
-        setTimeout(() => {
-            foo = 'cruiser';
-        }, 100);
     }
 
     if (foo === 'cruiser') {
         shipPlacement(e, 3);
-        setTimeout(() => {
-            foo = 'battleship';
-        }, 100);
     }
 
     if (foo === 'battleship') {
         shipPlacement(e, 4);
-        setTimeout(() => {
-            foo = 'carrier';
-        }, 100);
     }
 
     if (foo === 'carrier') {
@@ -279,8 +281,3 @@ grids.forEach(el => {
 });
 
 directionBtn.addEventListener('click', changeDirection);
-
-
-setInterval(() => {
-    console.log(board);
-}, 5000)
