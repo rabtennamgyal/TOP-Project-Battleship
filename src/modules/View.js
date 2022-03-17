@@ -34,12 +34,12 @@ function changeDirection() {
 // 1. this function should also take care of creating the ships.
 // a. should also check if a ship is already placed on a certain index.
 
-// Need to now change the creating of the different ships in the dom. 
-
 
 function shipPlacement(e, length) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
+    console.log(index);
+    console.log(covered);
 
     const arr = []; // make sure the first number >= 0 && last number <= 99.
 
@@ -51,7 +51,7 @@ function shipPlacement(e, length) {
             const two = index + 1;
             
             if (covered.includes(one) || covered.includes(two)) {
-                console.log(covered);
+                return;
             } else {
                 arr.push(index, index + 1);
                 covered.push(index, index + 1);
@@ -78,7 +78,7 @@ function shipPlacement(e, length) {
             const three = index + 2;
 
             if (covered.includes(one) || covered.includes(two) || covered.includes(three)) {
-                console.log(covered);
+                return;
             } else {
                 arr.push(index, index + 1, index + 2);
                 covered.push(index, index + 1, index + 2);
@@ -94,17 +94,17 @@ function shipPlacement(e, length) {
                 });
                 newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
                 foo = 'battleship';
-                console.log(foo);
-                console.log(board);
             }
         } else if (length === 4 && position + length <= 10) {
             const one = index;
             const two = index + 1;
             const three = index + 2;
-            const four = index + 4;
+            const four = index + 3;
+            console.log(one, two, three, four);
+            console.log(covered);
 
             if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four)) {
-                console.log(covered);
+                return;
             } else {
                 arr.push(index, index + 1, index + 2, index + 3);
                 covered.push(index, index + 1, index + 2, index + 3);
@@ -120,8 +120,6 @@ function shipPlacement(e, length) {
                 });
                 newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
                 foo = 'carrier';
-                console.log(foo);
-                console.log(board);
             }
         } else if (length === 5 && position + length <= 10) {
             const one = index; 
@@ -131,7 +129,7 @@ function shipPlacement(e, length) {
             const five = index + 5;
 
             if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four) || covered.includes(five)) {
-                console.log(covered);
+                return;
             } else {
                 arr.push(index, index + 1, index + 2, index + 3, index + 4);
                 covered.push(index, index + 1, index + 2, index + 3, index + 4);
@@ -146,8 +144,6 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
-                console.log(foo);
-                console.log(board);
             }
         } 
     };
@@ -155,54 +151,103 @@ function shipPlacement(e, length) {
     if (currentDirection === 'Y') {
         const position = changeBasisY(index);
 
-        if (length === 2 && position + length <= 82) {
-            arr.push(index, index + 10);
-            const divs = Array.from(grids);
-            const curDivs = [];
+        if (length === 2 && position + length <= 82 && foo === 'destroyer' || foo === 'submarine') {
+            const one = index;
+            const two = index + 10;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
+            if (covered.includes(one) || covered.includes(two)) {
+                return;
+            } else {
+                arr.push(index, index + 10);
+                covered.push(index, index + 10);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, destroyer.name, destroyer.name);
+                count++;
 
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
+                if (count === 2) {
+                    foo = 'cruiser';
+                }
+            };
         } else if (length === 3 && position + length <= 73) {
-            arr.push(index, index + 10, index + 20);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index; 
+            const two = index + 10;
+            const three = index + 20;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three)) {
+                return;
+            } else {
+                arr.push(index, index + 10, index + 20);
+                covered.push(index, index + 10, index + 20)
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+                foo = 'battleship';
+            }
         } else if (length === 4 && position + length <= 64) {
-            arr.push(index, index + 10, index + 20, index + 30);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index;
+            const two = index + 10;
+            const three = index + 20;
+            const four = index + 30;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four)) {
+                return;
+            } else {
+                arr.push(index, index + 10, index + 20, index + 30);
+                covered.push(index, index + 10, index + 20, index + 30);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+                foo = 'carrier';
+            }
         } else if (length === 5 && position + length <= 55) {
-            arr.push(index, index + 10, index + 20, index + 30, index + 40);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index; 
+            const two = index + 10;
+            const three = index + 20;
+            const four = index + 30;
+            const five = index + 40;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four) || covered.includes(five)) {
+                return;
+            } else {
+                arr.push(index, index + 10, index + 20, index + 30, index + 40);
+                covered.push(index, index + 10, index + 20, index + 30, index + 40);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+            }
         };
     };
 };
