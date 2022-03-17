@@ -21,9 +21,6 @@ const carrier = new Ship('carrier', 5);
 const missedShots = newBoard.missedShots;
 
 
-console.log(board);
-
-
 function changeDirection() {
     if (currentDirection === 'X') {
         currentDirection = 'Y';
@@ -36,9 +33,8 @@ function changeDirection() {
 // 1. this function should also take care of creating the ships.
 // a. should also check if a ship is already placed on a certain index.
 
+// Need to now change the creating of the different ships in the dom. 
 
-// return is not stoping the ship placement function cuz it is stoping the 
-// covered.forEach() functions. need that return on the outer scope.
 
 function shipPlacement(e, length) {
     const target = e.target;
@@ -50,83 +46,96 @@ function shipPlacement(e, length) {
         const position = changeBasisX(index);
 
         if (length === 2 && position + length <= 10) {
-            arr.push(index, index + 1);
-            covered.forEach(el => {
-                if (el === index || el === index + 1) {
-                    console.log('x');
-                    return;
-                }
-            })
-            covered.push(index, index + 1);
-            const divs = Array.from(grids);
-            const curDivs = [];
-
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
-            newBoard.placeShip(index, length, destroyer.name, destroyer.name);
+            const one = index;
+            const two = index + 1;
+            
+            if (covered.includes(one) || covered.includes(two)) {
+                console.log(covered);
+            } else {
+                arr.push(index, index + 1);
+                covered.push(index, index + 1);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, destroyer.name, destroyer.name);
+            }
         } else if (length === 3 && position + length <= 10) {
-            arr.push(index, index + 1, index + 2);
-            covered.forEach(el => {
-                if (el === index || el === index + 1 || el === index + 2) {
-                    console.log('x');
-                }
-            })
-            covered.push(index, index + 1, index + 2);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index; 
+            const two = index + 1;
+            const three = index + 2;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
-            newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three)) {
+                console.log(covered);
+            } else {
+                arr.push(index, index + 1, index + 2);
+                covered.push(index, index + 1, index + 2);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+            }
         } else if (length === 4 && position + length <= 10) {
-            arr.push(index, index + 1, index + 2, index + 3);
-            covered.forEach(el => {
-                if (el === index || el === index + 1 || el === index + 2 || el === index + 3) {
-                    console.log('x');
-                }
-            })
-            covered.push(index, index + 1, index + 2, index + 3);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index;
+            const two = index + 1;
+            const three = index + 2;
+            const four = index + 4;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
-            newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four)) {
+                console.log(covered);
+            } else {
+                arr.push(index, index + 1, index + 2, index + 3);
+                covered.push(index, index + 1, index + 2, index + 3);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+            }
         } else if (length === 5 && position + length <= 10) {
-            arr.push(index, index + 1, index + 2, index + 3, index + 4);
-            covered.forEach(el => {
-                if (el === index || el === index + 1 || el === index + 2 || el === index + 3 || el === index + 4) {
-                    console.log('x');
-                }
-            })
-            covered.push(index, index + 1, index + 2, index + 3, index + 4);
-            const divs = Array.from(grids);
-            const curDivs = [];
+            const one = index; 
+            const two = index + 1;
+            const three = index + 2;
+            const four = index + 4;
+            const five = index + 5;
 
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-            });
-            newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
-        }
+            if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four) || covered.includes(five)) {
+                console.log(covered);
+            } else {
+                arr.push(index, index + 1, index + 2, index + 3, index + 4);
+                covered.push(index, index + 1, index + 2, index + 3, index + 4);
+                const divs = Array.from(grids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    el.style.background = '#41ffb0';
+                });
+                newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+            }
+        } 
     };
 
     if (currentDirection === 'Y') {
@@ -188,7 +197,7 @@ function shipPlacement(e, length) {
 function setShips(e) {
     if (foo === 'destroyer') {
         shipPlacement(e, 2);
-        setTimeout(() => {
+        setTimeout(() => { // this code need to be invoked when the ship is actually placed.
             foo = 'submarine';
         }, 100);
     }
@@ -270,3 +279,8 @@ grids.forEach(el => {
 });
 
 directionBtn.addEventListener('click', changeDirection);
+
+
+setInterval(() => {
+    console.log(board);
+}, 5000)
