@@ -65,7 +65,13 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
+
+                // if (foo === 'destroyer') {
                 newBoard.placeShip(index, length, destroyer.name, destroyer.name);
+                // } else if (foo === 'submarine') {
+                //  newBoard.placeShip(index, length, submarine.name, submarine.name);
+                // }
+
                 count++;
 
                 if (count === 2) {
@@ -121,12 +127,12 @@ function shipPlacement(e, length) {
                 newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
                 foo = 'carrier';
             }
-        } else if (length === 5 && position + length <= 10) {
+        } else if (length === 5 && position + length < 10) {
             const one = index; 
             const two = index + 1;
             const three = index + 2;
-            const four = index + 4;
-            const five = index + 5;
+            const four = index + 3;
+            const five = index + 4;
 
             if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four) || covered.includes(five)) {
                 return;
@@ -143,7 +149,12 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
+                
                 newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+                
+                setTimeout(() => {
+                    foo = 'attack';
+                }, 2000);
             }
         } 
     };
@@ -276,6 +287,7 @@ function setShips(e) {
 };
 
 
+// Attack is working on x axis but not on the Y axis.
 function attack(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
@@ -289,7 +301,6 @@ function attack(e) {
                 destroyer.hit(index);
                 destroyer.isSunk();
                 board.splice(index, 1, '');
-                newBoard.checkShips();
             } else if (shipType === 'submarine') {
                 submarine.hit(index);
                 submarine.isSunk();
@@ -312,17 +323,24 @@ function attack(e) {
         if (grids[index].style.background !== 'red') {
             grids[index].style.background = '#fff';
             newBoard.receiveAttack(index);
-            console.log(missedShots);
         }
-    }
+    };
+
+    console.log(board);
 };
 
 // Event Listeners 
 
 grids.forEach(el => {
     el.addEventListener('click', (e) => {
-        setShips(e);
-    });
+        if (foo !== 'attack') {
+            setShips(e);
+        }
+
+        if (foo === 'attack') {
+            attack(e);
+        }
+    }); 
 });
 
 directionBtn.addEventListener('click', changeDirection);
