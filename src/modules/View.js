@@ -7,7 +7,6 @@ const directionBtn = document.getElementById('changeDirection');
 
 let currentDirection = 'X';
 let foo = 'destroyer';
-let count = 0; // move from destroyer & submarine to cruiser. 
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
@@ -38,13 +37,17 @@ function changeDirection() {
 function shipPlacement(e, length) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
-    console.log(index);
-    console.log(covered);
 
     const arr = []; // make sure the first number >= 0 && last number <= 99.
 
     if (currentDirection === 'X') {
         const position = changeBasisX(index);
+
+        const one = index; 
+        const two = index + 1;
+        const three = index + 2;
+        const four = index + 3;
+        const five = index + 4;
 
         if (length === 2 && position + length <= 10 && foo === 'destroyer' || foo === 'submarine') {
             const one = index;
@@ -66,15 +69,11 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
 
-                // if (foo === 'destroyer') {
-                newBoard.placeShip(index, length, destroyer.name, destroyer.name);
-                // } else if (foo === 'submarine') {
-                //  newBoard.placeShip(index, length, submarine.name, submarine.name);
-                // }
-
-                count++;
-
-                if (count === 2) {
+                if (foo === 'destroyer') {
+                    newBoard.placeShipX(index, length, destroyer.name, destroyer.name);
+                    foo = 'submarine';
+                } else if (foo === 'submarine') {
+                    newBoard.placeShipX(index, length, submarine.name, submarine.name);
                     foo = 'cruiser';
                 }
             }
@@ -98,7 +97,8 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+
+                newBoard.placeShipX(index, length, cruiser.name, cruiser.name, cruiser.name);
                 foo = 'battleship';
             }
         } else if (length === 4 && position + length <= 10) {
@@ -106,8 +106,6 @@ function shipPlacement(e, length) {
             const two = index + 1;
             const three = index + 2;
             const four = index + 3;
-            console.log(one, two, three, four);
-            console.log(covered);
 
             if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four)) {
                 return;
@@ -124,10 +122,11 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+
+                newBoard.placeShipX(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
                 foo = 'carrier';
             }
-        } else if (length === 5 && position + length < 10) {
+        } else if (length === 5 && position + length <= 10) { // or could be lenght < 10
             const one = index; 
             const two = index + 1;
             const three = index + 2;
@@ -150,7 +149,7 @@ function shipPlacement(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 
-                newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+                newBoard.placeShipX(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
                 
                 setTimeout(() => {
                     foo = 'attack';
@@ -181,10 +180,12 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, destroyer.name, destroyer.name);
-                count++;
 
-                if (count === 2) {
+                if (foo === 'destroyer') {
+                    newBoard.placeShipY(length, foo, one, two);
+                    foo = 'submarine';
+                } else if (foo === 'submarine') {
+                    newBoard.placeShipY(length, foo, one, two);
                     foo = 'cruiser';
                 }
             };
@@ -208,7 +209,8 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, cruiser.name, cruiser.name, cruiser.name);
+
+                newBoard.placeShipY(length, foo, one, two, three)
                 foo = 'battleship';
             }
         } else if (length === 4 && position + length <= 64) {
@@ -232,7 +234,8 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, battleship.name, battleship.name, battleship.name, battleship.name);
+                
+                newBoard.placeShipY(length, foo, one, two, three, four)
                 foo = 'carrier';
             }
         } else if (length === 5 && position + length <= 55) {
@@ -257,7 +260,12 @@ function shipPlacement(e, length) {
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
-                newBoard.placeShip(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+
+                newBoard.placeShipY(length, foo, one, two, three, four, five);
+
+                setTimeout(() => {
+                    foo = 'attack';
+                }, 2000);
             }
         };
     };
@@ -287,7 +295,6 @@ function setShips(e) {
 };
 
 
-// Attack is working on x axis but not on the Y axis.
 function attack(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));

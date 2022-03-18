@@ -16,8 +16,8 @@ function GameBoard() {
         return board;
     }
     
-    // 2. Place Ships in the board
-    const placeShip = (start, length, name) => {
+    // 2. Place Ships in the board X-axis.
+    const placeShipX = (start, length, name) => {
         // Take the already created ship as an argument and place it in an array. 
         if (length === 2) {
             board.splice(start, length, name, name);
@@ -30,14 +30,49 @@ function GameBoard() {
         };
     };
 
-    // 3. Receive Attack 
+    // 3. Place Ships in the board Y-axis.
+    const placeShipY = (length, foo, one, two, three, four, five) => {
+        if (length === 2) {
+            for (let i = 0; i <= board.length; i++) {
+                if (foo === 'destroyer') {
+                    if (i === one || i === two) {
+                        board[i] = 'destroyer';
+                    }
+                } else if (foo === 'submarine') {
+                    if (i === one || i === two) {
+                        board[i] = 'submarine';
+                    }
+                }
+            }
+        } else if (length === 3) {
+            for (let i = 0; i <= board.length; i++) {
+                if (i === one || i === two || i === three) {
+                    board[i] = 'cruiser';
+                }
+            }
+        } else if (length === 4) {
+            for (let i = 0; i <= board.length; i++) {
+                if (i === one || i === two || i === three || i === four) {
+                    board[i] = 'battleship';
+                }
+            }
+        } else if (length === 5) {
+            for (let i = 0; i <= board.length; i++) {
+                if (i === one || i === two || i === three || i === four || i === five) {
+                    board[i] = 'carrier';
+                }
+            }
+        }
+    };
+
+    // 4. Receive Attack 
     const receiveAttack = (index) => {
         if (!missedShots.includes(index)) {
             missedShots.push(index);
         }
     };
 
-    return { missedShots, createBoard, placeShip, receiveAttack };
+    return { missedShots, createBoard, placeShipX, placeShipY, receiveAttack };
 };
 
 
