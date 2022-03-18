@@ -1,13 +1,19 @@
 const grids = document.querySelectorAll('.grid');
-const ships = document.querySelectorAll('.ship');
+const gridd = document.querySelectorAll('.gridd');
 
 let count = 0;
+let count2 = 0;
 
 // Give all the grids the index attribute starting with 0
 grids.forEach(el => {
     el.setAttribute('index', count);
     count++;
 });
+
+gridd.forEach(el => {
+    el.setAttribute('index', count2);
+    count2++;
+})
 
 // Change the Ship's direction between x-axis and y-axis.
 function changeBasisX(num) {

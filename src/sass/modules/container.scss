@@ -34,36 +34,38 @@
             grid-template-columns: repeat(10, 1fr);
             grid-template-rows: repeat(10, 1fr);
 
-            .grid {
+            .grid, .gridd {
                 z-index: 100;
                 cursor: pointer;
                 border: .1px solid #ffffff;
                 background: #22aeff;
-            }
-
-            .droppable {
-                border: .1px solid #fff;
             }
         }
     }
 
     .ShipContainer {
         height: 100%;
-        //border: solid #ffffff;
         display: flex;
         align-items: center;
         justify-content: space-around;
 
-        .ship {
-            height: 28%;
-            display: flex;
-            background: #41ffb0;
+        .buttons {
 
-            .shipBox {
-                cursor: move;
-                border: .1px solid #000000;
-                height: 100%;
-                width: 3.8rem;
+            button {
+                background: #fff;
+                color: #000;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                border-radius: 2rem;
+                height: 3rem;
+                width: 10rem;
+                transition: 0.7s ease-in;
+
+                &:hover {
+                    background: #000;
+                    color: #fff;
+                }
             }
         }
     }

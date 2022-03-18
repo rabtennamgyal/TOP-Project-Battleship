@@ -4,8 +4,10 @@ const Ship = require('./shipfactory');
 function GameBoard() {
     // 1. Create board for the game ( that should be connected with the DOM ).
     let board;
+    let board2;
     const missedShots = []; // will records all the missed shots
     
+    // 1. ceate board
     const createBoard = () => {
         board = [];
 
@@ -14,7 +16,19 @@ function GameBoard() {
         }
 
         return board;
-    }
+    };
+
+    // 1.a create board
+    const createBoard2 = () => {
+        board2 = [];
+
+        while (board2.length !== 100) {
+            board2.push('');
+        }
+
+        return board2;
+    };
+
     
     // 2. Place Ships in the board X-axis.
     const placeShipX = (start, length, name) => {
@@ -27,6 +41,20 @@ function GameBoard() {
             board.splice(start, length, name, name, name, name);
         } else if (length === 5) {
             board.splice(start, length, name, name, name, name, name);
+        };
+    };
+
+    // 2.a Place Ships in the board 
+    const placeShipX2 = (start, length, name) => {
+        // Take the already created ship as an argument and place it in an array. 
+        if (length === 2) {
+            board2.splice(start, length, name, name);
+        } else if (length === 3) {
+            board2.splice(start, length, name, name, name);
+        } else if (length === 4) {
+            board2.splice(start, length, name, name, name, name);
+        } else if (length === 5) {
+            board2.splice(start, length, name, name, name, name, name);
         };
     };
 
@@ -72,7 +100,7 @@ function GameBoard() {
         }
     };
 
-    return { missedShots, createBoard, placeShipX, placeShipY, receiveAttack };
+    return { missedShots, createBoard, createBoard2, placeShipX, placeShipX2, placeShipY, receiveAttack };
 };
 
 
@@ -80,12 +108,3 @@ function GameBoard() {
 
 
 module.exports = GameBoard;
-
-
-
-// const board =  [
-//     'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10',
-//     'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8', 'b9', 'b10',
-//     'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10',
-//     'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10'
-// ];
