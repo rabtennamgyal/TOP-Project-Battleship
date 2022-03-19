@@ -93,6 +93,42 @@ function GameBoard() {
         }
     };
 
+    // 3.a Place Ships in the board Y-axis
+    const placeShipY2 = (length, foo2, one, two, three, four, five) => {
+        if (length === 2) {
+            for (let i = 0; i <= board2.length; i++) {
+                if (foo2 === 'destroyer') {
+                    if (i === one || i === two) {
+                        board2[i] = 'destroyer';
+                    }
+                } else if (foo2 === 'submarine') {
+                    if (i === one || i === two) {
+                        board2[i] = 'submarine';
+                    }
+                }
+            }
+        } else if (length === 3) {
+            for (let i = 0; i <= board2.length; i++) {
+                if (i === one || i === two || i === three) {
+                    board2[i] = 'cruiser';
+                }
+            }
+        } else if (length === 4) {
+            for (let i = 0; i <= board2.length; i++) {
+                if (i === one || i === two || i === three || i === four) {
+                    board2[i] = 'battleship';
+                }
+            }
+        } else if (length === 5) {
+            for (let i = 0; i <= board2.length; i++) {
+                if (i === one || i === two || i === three || i === four || i === five) {
+                    board2[i] = 'carrier';
+                }
+            }
+        }
+    };
+
+
     // 4. Receive Attack 
     const receiveAttack = (index) => {
         if (!missedShots.includes(index)) {
@@ -100,7 +136,7 @@ function GameBoard() {
         }
     };
 
-    return { missedShots, createBoard, createBoard2, placeShipX, placeShipX2, placeShipY, receiveAttack };
+    return { missedShots, createBoard, createBoard2, placeShipX, placeShipX2, placeShipY, placeShipY2, receiveAttack };
 };
 
 

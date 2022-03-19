@@ -7,6 +7,113 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 10% 70% 20%;
 
+    .intro {
+        display: grid;
+        grid-template-rows: 10% 90%;
+        z-index: 1000;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background: #000;
+
+        .introOne {
+            display: grid;
+            place-items: center;
+
+            #title {
+                cursor: pointer;
+                color: #fff;
+                font-family: cursive, monospace, sans-serif;
+                font-size: 3rem;
+            }
+        }
+
+        .introTwo {
+            display: grid;
+            grid-template-rows: 70% 30%;
+
+            .introTwoOne {
+                display: grid;
+                place-items: center;
+
+                h1 {
+                    color: #fff;
+                    font-size: 5rem;
+                    font-family: cursive, monospace, sans-serif;
+                }
+            }
+
+            .introTwoTwo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                #pvp, #pvc {
+                    cursor: pointer;
+                    font-family: cursive, monospace, sans-serif;
+                    font-size: 1.5rem;
+                    font-weight: 900;
+                    margin: 0 1rem;
+                    background: #fff;
+                    color: #000;
+                    border: none;
+                    outline: none;
+                    border-radius: 2rem;
+                    height: 4rem;
+                    width: 17rem;
+                    transition: 0.7s ease-in;
+    
+                    &:hover {
+                        color: #fff;
+                        border: .1px solid #fff;
+                        background: #000;
+                    }
+                }
+            }
+        }
+    }
+
+    .outro {
+        display: none;
+        place-items: center;
+        z-index: 1000;
+        position: absolute;
+        height: 0;
+        width: 100vw;
+        background: #000;
+        transition: 1s ease-in-out;
+        animation: slideIn 1s forwards;
+
+        .outroDiv {
+            border-radius: 10px;
+            height: 80%;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+            button {
+                background: #fff;
+                cursor: pointer;
+                height: 40%;
+                width: 40%;
+                margin: 0 5rem;
+                border-radius: 10rem;
+                font-size: 3rem;
+                font-family: cursive, monospace, sans-serif;
+                color: #000;
+                transition: 0.7s ease-in-out;
+
+                &:hover {
+                    color: #fff;
+                    border: 1px solid #fff;
+                    background: #000;
+                }
+            }
+        }
+    }
+
     .navbar {
         height: 100%;
         width: 100%;
@@ -40,6 +147,10 @@
                 border: .1px solid #ffffff;
                 background: #22aeff;
             }
+
+            .popup {
+                animation: popping .7s;
+            }
         }
     }
 
@@ -63,6 +174,7 @@
                 transition: 0.7s ease-in;
 
                 &:hover {
+                    border: .1px solid #fff;
                     background: #000;
                     color: #fff;
                 }
@@ -83,3 +195,27 @@
         grid-row: 3 / 3;
     }
 }
+
+
+@keyframes popping {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+};
+
+
+@keyframes slideIn {
+    0% {
+        height: 0;
+        transform-origin: 0 0;
+    }
+
+    100% {
+        height: 100vh;
+        transform-origin: 0 0;
+    }
+};

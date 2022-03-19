@@ -64,78 +64,12 @@ function changeBasisY(num) {
     }
 };
 
+// Open modal to get player's name 
+function hideIntro() {
+    const intro = document.querySelector('.intro');
 
-// Find the length of the current ship (dom element) in order to use it as a logic to place on the dom board.
-// ships.forEach(el => {
-//     el.addEventListener('dragstart', (e) => {
-//         if (e.target.id === 'destroyer' || e.target.id === 'submarine') {
-//             currentShipLength = 2;
-//         } else if (e.target.id === 'cruiser') {
-//             currentShipLength = 3;
-//         } else if (e.target.id === 'battleship') {
-//             currentShipLength = 4;
-//         } else if (e.target.id === 'carrier') {
-//             currentShipLength = 5;
-//         }
-//     });
-// });
+    intro.style.display = 'none';
+};
 
 
-// grids.forEach(el => {
-//     el.addEventListener('dragenter', (e) => {
-//         if (currentShipLength === 2) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             one.style.background = '#41ffb0';
-//             two.style.background = '#41ffb0';
-//         } else if (currentShipLength === 3) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//             one.style.background = '#41ff';
-//             two.style.background = '#41ff';
-//             three.style.background = '#41ff';
-//         } else if (currentShipLength === 4) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//             const four = three.nextElementSibling;
-//         } else if (currentShipLength === 5) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//             const four = three.nextElementSibling;
-//             const five = four.nextElementSibling;
-//         }
-//     });
-// });
-
-
-// grids.forEach(el => {
-//     el.addEventListener('dragleave', (e) => {
-//         if (currentShipLength === 2) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             one.style.background = '';
-//             two.style.background = '';
-//         } else if (currentShipLength === 3) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//         } else if (currentShipLength === 4) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//             const four = three.nextElementSibling;
-//         } else if (currentShipLength === 5) {
-//             const one = e.target;
-//             const two = e.target.nextElementSibling;
-//             const three = two.nextElementSibling;
-//             const four = three.nextElementSibling;
-//             const five = four.nextElementSibling;
-//         }
-//     });
-// });
-
-
-export { changeBasisX, changeBasisY };
+export { changeBasisX, changeBasisY, hideIntro };

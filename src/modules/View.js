@@ -1,4 +1,4 @@
-import { changeBasisX, changeBasisY } from './util/domutil';
+import { changeBasisX, changeBasisY, hideIntro } from './util/domutil';
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
@@ -7,10 +7,13 @@ const grids = document.querySelectorAll('.grid');
 const gridds = document.querySelectorAll('.gridd');
 const directionBtn = document.getElementById('changeDirection');
 
+// Intro related dom elements
+const pvpBtn = document.getElementById('pvp');
+const pvcBtn = document.getElementById('pvc');
+
 let currentDirection = 'X';
 let foo = 'destroyer';
 // 😀
-let currentDirection2 = 'X';
 let foo2 = 'destroyer';
 
 const newBoard = new gameBoard();
@@ -33,8 +36,6 @@ const cruiser2 = new Ship('cruiser', 3);
 const battleship2 = new Ship('battleship', 4);
 const carrier2 = new Ship('carrier', 5);
 
-// const missedShots = newBoard.missedShots;
-
 
 function changeDirection() {
     if (currentDirection === 'X') {
@@ -43,18 +44,6 @@ function changeDirection() {
         currentDirection = 'X';
     }
 };
-// 
-function changeDirection2() {
-    if (currentDirection2 === 'X') {
-        currentDirection2 = 'Y';
-    } else if (currentDirection2 === 'Y') {
-        currentDirection2 = 'X';
-    }
-}
-
-
-// 1. this function should also take care of creating the ships.
-// a. should also check if a ship is already placed on a certain index.
 
 
 function shipPlacement(e, length) {
@@ -170,8 +159,19 @@ function shipPlacement(e, length) {
                 
                 setTimeout(() => {
                     foo = 'attack';
-                    grids.forEach(el => el.style.background = '#41ffb0');
-                }, 2000);
+                    let interval = 50;
+                    let promise = Promise.resolve();
+
+                    grids.forEach(el => {
+                        promise = promise.then(() => {
+                            el.style.background = '#22aeff';
+                            el.classList.add('popup');
+                            return new Promise((resolve) => {
+                                setTimeout(resolve, interval);
+                            });
+                        });
+                    });
+                }, 1000);
             }
         } 
     };
@@ -283,8 +283,19 @@ function shipPlacement(e, length) {
 
                 setTimeout(() => {
                     foo = 'attack';
-                    grids.forEach(el => el.style.background = '#41ffb0');
-                }, 2000);
+                    let interval = 50;
+                    let promise = Promise.resolve();
+
+                    grids.forEach(el => {
+                        promise = promise.then(() => {
+                            el.style.background = '#22aeff';
+                            el.classList.add('popup');
+                            return new Promise((resolve) => {
+                                setTimeout(resolve, interval);
+                            });
+                        });
+                    });
+                }, 1000);
             }
         };
     };
@@ -296,7 +307,7 @@ function shipPlacement2(e, length) {
 
     const arr = []; // make sure the first number >= 0 && last number <= 99.
 
-    if (currentDirection2 === 'X') {
+    if (currentDirection === 'X') {
         const position = changeBasisX(index);
 
         if (length === 2 && position + length <= 10 && foo2 === 'destroyer' || foo2 === 'submarine') {
@@ -403,13 +414,24 @@ function shipPlacement2(e, length) {
                 
                 setTimeout(() => {
                     foo2 = 'attack';
-                    gridds.forEach(el => el.style.background = '#41ffb0');
-                }, 2000);
+                    let interval = 50;
+                    let promise = Promise.resolve();
+
+                    gridds.forEach(el => {
+                        promise = promise.then(() => {
+                            el.style.background = '#22aeff';
+                            el.classList.add('popup');
+                            return new Promise((resolve) => {
+                                setTimeout(resolve, interval);
+                            });
+                        });
+                    });
+                }, 1000);
             }
         } 
     };
 
-    if (currentDirection2 === 'Y') {
+    if (currentDirection === 'Y') {
         const position = changeBasisY(index);
 
         if (length === 2 && position + length <= 82 && foo2 === 'destroyer' || foo2 === 'submarine') {
@@ -433,10 +455,10 @@ function shipPlacement2(e, length) {
                 });
 
                 if (foo2 === 'destroyer') {
-                    newBoard2.placeShipY(length, foo2, one, two);
+                    newBoard2.placeShipY2(length, foo2, one, two);
                     foo2 = 'submarine';
                 } else if (foo2 === 'submarine') {
-                    newBoard2.placeShipY(length, foo2, one, two);
+                    newBoard2.placeShipY2(length, foo2, one, two);
                     foo2 = 'cruiser';
                 }
             };
@@ -461,7 +483,7 @@ function shipPlacement2(e, length) {
                     el.style.background = '#41ffb0';
                 });
 
-                newBoard2.placeShipY(length, foo2, one, two, three)
+                newBoard2.placeShipY2(length, foo2, one, two, three)
                 foo2 = 'battleship';
             }
         } else if (length === 4 && position + length <= 64) {
@@ -486,7 +508,7 @@ function shipPlacement2(e, length) {
                     el.style.background = '#41ffb0';
                 });
                 
-                newBoard2.placeShipY(length, foo2, one, two, three, four)
+                newBoard2.placeShipY2(length, foo2, one, two, three, four)
                 foo2 = 'carrier';
             }
         } else if (length === 5 && position + length <= 55) {
@@ -512,12 +534,23 @@ function shipPlacement2(e, length) {
                     el.style.background = '#41ffb0';
                 });
 
-                newBoard2.placeShipY(length, foo2, one, two, three, four, five);
+                newBoard2.placeShipY2(length, foo2, one, two, three, four, five);
 
                 setTimeout(() => {
                     foo2 = 'attack';
-                    grids.forEach(el => el.style.background = '#41ffb0');
-                }, 2000);
+                    let interval = 50;
+                    let promise = Promise.resolve();
+
+                    gridds.forEach(el => {
+                        promise = promise.then(() => {
+                            el.style.background = '#22aeff';
+                            el.classList.add('popup');
+                            return new Promise((resolve) => {
+                                setTimeout(resolve, interval);
+                            });
+                        });
+                    });
+                }, 1000);
             }
         };
     };
@@ -662,7 +695,9 @@ function checkBoard() {
     });
 
     if (count === 16) {
-        console.log('Player one win!!');
+        const outro = document.querySelector('.outro');
+
+        outro.style.display = 'grid';
     };
 };
 // 
@@ -676,7 +711,9 @@ function checkBoard2() {
     });
 
     if (count === 16) {
-        console.log('Player 2 wins!!');
+        const outro = document.querySelector('.outro');
+
+        outro.style.display = 'grid';
     };
 };
 
@@ -710,3 +747,7 @@ gridds.forEach(el => {
 
 
 directionBtn.addEventListener('click', changeDirection);
+
+// starting game, hiding the intro page.
+pvpBtn.addEventListener('click', hideIntro);
+pvcBtn.addEventListener('click', hideIntro);
