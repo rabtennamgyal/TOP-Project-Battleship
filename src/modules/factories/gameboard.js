@@ -1,4 +1,3 @@
-const Ship = require('./shipfactory');
 // 👾 GameBoard Factory Function
 
 function GameBoard() {
@@ -28,7 +27,6 @@ function GameBoard() {
 
         return board2;
     };
-
     
     // 2. Place Ships in the board X-axis.
     const placeShipX = (start, length, name) => {
@@ -128,15 +126,18 @@ function GameBoard() {
         }
     };
 
+    // 4. Clear boards 
+    const clearBoard = (currentBoard) => {
+        currentBoard.forEach((el, i) => {
+            if (el !== '') {
+                currentBoard.splice(i, 1, '');
+            }
+        });
 
-    // 4. Receive Attack 
-    const receiveAttack = (index) => {
-        if (!missedShots.includes(index)) {
-            missedShots.push(index);
-        }
+        return currentBoard;
     };
 
-    return { missedShots, createBoard, createBoard2, placeShipX, placeShipX2, placeShipY, placeShipY2, receiveAttack };
+    return { missedShots, createBoard, createBoard2, placeShipX, placeShipX2, placeShipY, placeShipY2, clearBoard };
 };
 
 

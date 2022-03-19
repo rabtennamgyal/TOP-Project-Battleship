@@ -1,7 +1,9 @@
-import { changeBasisX, changeBasisY, hideIntro } from './util/domutil';
+import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP } from './util/domutil';
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
+const Player = require('../modules/factories/playerfactory');
+
 // grid one is grid, grid two is gridd.
 const grids = document.querySelectorAll('.grid');
 const gridds = document.querySelectorAll('.gridd');
@@ -10,19 +12,33 @@ const directionBtn = document.getElementById('changeDirection');
 // Intro related dom elements
 const pvpBtn = document.getElementById('pvp');
 const pvcBtn = document.getElementById('pvc');
+// Outro related dom elements
+const returnHome = document.getElementById('returnHome');
+const playAgain = document.getElementById('playAgain');
+// Modal related dom elements
+const input1 = document.getElementById('playerOne');
+const input2 = document.getElementById('playerTwo');
+const p1Btn = document.getElementById('playerOneBtn');
+const p2Btn = document.getElementById('playerTwoBtn');
+// Starting game 
+const startGame = document.getElementById('playGame');
 
+
+
+// 🚢🚢🚢 Game Assets are all listed below
 let currentDirection = 'X';
 let foo = 'destroyer';
-// 😀
 let foo2 = 'destroyer';
+let playerOne;
+let playerTwo;
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
-const covered = []; // this arr keeps track of all the indexes that are covered in the board.
+let covered = []; // this arr keeps track of all the indexes that are covered in the board.
 // 
 const newBoard2 = new gameBoard();
 const board2 = newBoard2.createBoard2();
-const covered2 = []; // this arr keeps track of all the indexes that are covered in the board.
+let covered2 = []; // this arr keeps track of all the indexes that are covered in the board.
 
 const destroyer = new Ship('destroyer', 2);
 const submarine = new Ship('submarine', 2);
@@ -636,11 +652,8 @@ function attack(e) {
     } else {
         if (grids[index].style.background !== 'red') {
             grids[index].style.background = '#fff';
-            newBoard.receiveAttack(index);
         }
     };
-
-    console.log(board);
 };
 // 
 function attack2(e) {
@@ -677,11 +690,8 @@ function attack2(e) {
     } else {
         if (gridds[index].style.background !== 'red') {
             gridds[index].style.background = '#fff';
-            newBoard2.receiveAttack(index);
         }
     };
-
-    console.log(board2);
 };
 
 // Function check board for winners
@@ -696,8 +706,8 @@ function checkBoard() {
 
     if (count === 16) {
         const outro = document.querySelector('.outro');
-
         outro.style.display = 'grid';
+        alert(`${playerOne.name} wins`);
     };
 };
 // 
@@ -712,8 +722,8 @@ function checkBoard2() {
 
     if (count === 16) {
         const outro = document.querySelector('.outro');
-
         outro.style.display = 'grid';
+        alert(`${playerTwo.name} wins`);
     };
 };
 
@@ -749,5 +759,84 @@ gridds.forEach(el => {
 directionBtn.addEventListener('click', changeDirection);
 
 // starting game, hiding the intro page.
-pvpBtn.addEventListener('click', hideIntro);
-pvcBtn.addEventListener('click', hideIntro);
+pvpBtn.addEventListener('click', openModalPvP);
+//             pvcBtn.addEventListener('click', hideIntro);
+
+p1Btn.addEventListener('click', () => {
+    if (input1.value) {
+        playerOne = new Player(input1.value);
+        input1.value = '';
+    }
+});
+
+p2Btn.addEventListener('click', () => {
+    if (input2.value) {
+        playerTwo = new Player(input2.value);
+        input2.value = '';
+    }
+});
+
+
+// Starting game initally
+startGame.addEventListener('click', () => {
+    // 1. Close the current modal and the intro page
+    const intro = document.querySelector('.intro');
+    intro.style.display = 'none';
+    closeModalPvP();
+});
+
+
+// playing again or returning to home
+returnHome.addEventListener('click', () => {
+    const outro = document.querySelector('.outro');
+    const intro = document.querySelector('.intro');
+
+    // 1. Clear the outro and display intro
+    outro.style.display = 'none';
+    intro.style.display = 'grid';
+
+    // 2. Clear the dom and also the dom board array
+    grids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+
+    gridds.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+    
+    // 3. Resetting all conditions to start the game again
+    newBoard.clearBoard(board);
+    newBoard2.clearBoard(board2);
+    foo = 'destroyer';
+    foo2 = 'destroyer';
+    covered = [];
+    covered2 = [];
+});
+
+playAgain.addEventListener('click', () => {
+    const outro = document.querySelector('.outro');
+
+    // 1. Clear the outro and display intro
+    outro.style.display = 'none';
+
+    // 2. Clear the dom and also the dom board array
+    grids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+
+    gridds.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+    
+    // 3. Resetting all conditions to start the game again
+    newBoard.clearBoard(board);
+    newBoard2.clearBoard(board2);
+    foo = 'destroyer';
+    foo2 = 'destroyer';
+    covered = [];
+    covered2 = [];
+});

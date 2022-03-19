@@ -1,5 +1,8 @@
 const grids = document.querySelectorAll('.grid');
 const gridd = document.querySelectorAll('.gridd');
+// Modal related dom elements
+const pvpModal = document.querySelector('.pvpModal');
+
 
 let count = 0;
 let count2 = 0;
@@ -65,11 +68,17 @@ function changeBasisY(num) {
 };
 
 // Open modal to get player's name 
-function hideIntro() {
-    const intro = document.querySelector('.intro');
+// function hideIntro() {
+//     const intro = document.querySelector('.intro');
 
-    intro.style.display = 'none';
-};
+//     intro.style.display = 'none';
+// };
+function openModalPvP() {
+    pvpModal.style.display = 'grid';
+}
 
+function closeModalPvP() {
+    pvpModal.style.display = 'none';
+}
 
-export { changeBasisX, changeBasisY, hideIntro };
+export { changeBasisX, changeBasisY, openModalPvP, closeModalPvP };
