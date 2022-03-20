@@ -172,7 +172,7 @@ function shipPlacement(e, length) {
                 });
                 
                 newBoard.placeShipX(index, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
-                
+
                 setTimeout(() => {
                     foo = 'attack';
                     let interval = 50;
@@ -316,7 +316,7 @@ function shipPlacement(e, length) {
         };
     };
 };
-// 😀
+
 function shipPlacement2(e, length) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
@@ -594,7 +594,7 @@ function setShips(e) {
         shipPlacement(e, 5);
     }
 };
-// 😀
+
 function setShips2(e) {
     if (foo2 === 'destroyer') {
         shipPlacement2(e, 2);
@@ -655,7 +655,7 @@ function attack(e) {
         }
     };
 };
-// 
+
 function attack2(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
@@ -694,7 +694,7 @@ function attack2(e) {
     };
 };
 
-// Function check board for winners
+
 function checkBoard() {
     let count = 0;
 
@@ -705,12 +705,18 @@ function checkBoard() {
     });
 
     if (count === 16) {
-        const outro = document.querySelector('.outro');
-        outro.style.display = 'grid';
-        alert(`${playerOne.name} wins`);
+        setTimeout(() => {
+            const outro = document.querySelector('.outro');
+            const winner = document.querySelector('.declareWinner');
+            outro.style.display = 'grid';
+            const message = document.createElement('p');
+            message.classList.add('winnerStyle');
+            message.textContent = `${playerOne.name} wins 🏋️‍♀️`;
+            winner.appendChild(message);
+        });
     };
 };
-// 
+
 function checkBoard2() {
     let count = 0;
 
@@ -721,9 +727,15 @@ function checkBoard2() {
     });
 
     if (count === 16) {
-        const outro = document.querySelector('.outro');
-        outro.style.display = 'grid';
-        alert(`${playerTwo.name} wins`);
+        setTimeout(() => {
+            const outro = document.querySelector('.outro');
+            const winner = document.querySelector('.declareWinner');
+            outro.style.display = 'grid';
+            const message = document.createElement('p');
+            message.classList.add('winnerStyle');
+            message.textContent = `${playerTwo.name} wins 🏋️‍♀️`;
+            winner.appendChild(message);
+        }, 1000);
     };
 };
 
@@ -760,12 +772,14 @@ directionBtn.addEventListener('click', changeDirection);
 
 // starting game, hiding the intro page.
 pvpBtn.addEventListener('click', openModalPvP);
-//             pvcBtn.addEventListener('click', hideIntro);
+//             pvcBtn.addEventListener('click', hideIntro); ( player vs computer )
 
 p1Btn.addEventListener('click', () => {
     if (input1.value) {
         playerOne = new Player(input1.value);
         input1.value = '';
+    } else {
+        playerOne = new Player('Player One');
     }
 });
 
@@ -773,6 +787,8 @@ p2Btn.addEventListener('click', () => {
     if (input2.value) {
         playerTwo = new Player(input2.value);
         input2.value = '';
+    } else {
+        playerTwo = new Player('Player Two');
     }
 });
 
@@ -782,7 +798,7 @@ startGame.addEventListener('click', () => {
     // 1. Close the current modal and the intro page
     const intro = document.querySelector('.intro');
     intro.style.display = 'none';
-    closeModalPvP();
+    closeModalPvP();   
 });
 
 
@@ -813,6 +829,12 @@ returnHome.addEventListener('click', () => {
     foo2 = 'destroyer';
     covered = [];
     covered2 = [];
+    
+    // 4. Reset the winner declaration message in the outro modal
+    const winner = document.querySelector('.declareWinner');
+    while (winner.firstChild) {
+        winner.removeChild(winner.lastChild);
+    };
 });
 
 playAgain.addEventListener('click', () => {
@@ -839,4 +861,10 @@ playAgain.addEventListener('click', () => {
     foo2 = 'destroyer';
     covered = [];
     covered2 = [];
+
+    // 4. Reset the winner declaration message in the outro modal
+    const winner = document.querySelector('.declareWinner');
+    while (winner.firstChild) {
+        winner.removeChild(winner.lastChild);
+    };
 });
