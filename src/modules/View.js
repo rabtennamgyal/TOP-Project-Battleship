@@ -745,6 +745,7 @@ grids.forEach(el => {
     el.addEventListener('click', (e) => {
         if (foo !== 'attack') {
             setShips(e);
+            console.log(board);
         }
 
         if (foo === 'attack') {
@@ -752,8 +753,54 @@ grids.forEach(el => {
             checkBoard();
         }
     }); 
+
+    el.addEventListener('mouseover', () => {
+        if (foo === 'destroyer' || foo === 'submarine') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const onei = el.getAttribute('index');
+                const two = el.nextElementSibling;
+                const twoi = two.getAttribute('index');
+                const arr = [one, two];
+                arr.forEach(el => el.style.background = '#41ff');
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const arr = [one, two];
+                arr.forEach(el => el.style.background = '#41ff');
+            }
+        }
+    });
+
+    el.addEventListener('mouseleave', () => {
+        if (foo === 'destroyer' || foo === 'submarine') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const arr = [one, two];
+                arr.forEach(el => {
+                    if (el.style.background = '#41ff') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const arr = [one, two];
+                arr.forEach(el => {
+                    if (el.style.background = '#41ff') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        }
+    });
 });
-//
+
 gridds.forEach(el => {
     el.addEventListener('click', (e) => {
         if (foo2 !== 'attack') {
