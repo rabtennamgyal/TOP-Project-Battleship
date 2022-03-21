@@ -14,3 +14,8 @@ also start adding the responsive codes ( mixin ).
 
 
 3. Need to make computer logic
+
+
+// 
+1. next div color changes.
+2. color changes to purple even if the ship is already placed ( green ).

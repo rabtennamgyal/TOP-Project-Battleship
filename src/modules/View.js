@@ -1,5 +1,6 @@
 import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP } from './util/domutil';
 
+// rgb(65, 255, 176)
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
 const Player = require('../modules/factories/playerfactory');
@@ -166,7 +167,7 @@ function shipPlacement(e, length) {
                 arr.forEach(el => {
                     curDivs.push(divs[el]);
                 });
-    
+                
                 curDivs.forEach(el => {
                     el.style.background = '#41ffb0';
                 });
@@ -742,6 +743,145 @@ function checkBoard2() {
 // Event Listeners 
 
 grids.forEach(el => {
+    // 1. Event One
+    el.addEventListener('mouseover', () => {
+        if (el.matches(':hover')) {
+            if (foo === 'destroyer' || foo === 'submarine') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const arr = [one, two];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                    // make sure it doesn't change color of already placed ships
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = document.querySelector(`[index='${twoi}']`);
+                    const arr = [one, two];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } else if (foo === 'cruiser') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const arr = [one, two, three];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = document.querySelector(`[index='${twoi}']`);
+                    const threei = Number(onei + 20);
+                    const three = document.querySelector(`[index='${three}']`);
+                    const arr = [one, two, three];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } 
+            // add battleship (4) and carrier (5).
+        }
+    });
+    // 2. Event Two
+    el.addEventListener('mouseout', () => {
+        if (foo === 'destroyer' || foo === 'submarine') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const arr = [one, two];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const arr = [one, two];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        } else if (foo === 'cruiser') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const arr = [one, two, three];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const threei = Number(onei + 20);
+                const three = document.querySelector(`[index='${threei}']`)
+                const arr = [one, two, three];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        }
+    });
+    // 3. Event Three
     el.addEventListener('click', (e) => {
         if (foo !== 'attack') {
             setShips(e);
@@ -753,52 +893,6 @@ grids.forEach(el => {
             checkBoard();
         }
     }); 
-
-    el.addEventListener('mouseover', () => {
-        if (foo === 'destroyer' || foo === 'submarine') {
-            if (currentDirection === 'X') {
-                const one = el;
-                const onei = el.getAttribute('index');
-                const two = el.nextElementSibling;
-                const twoi = two.getAttribute('index');
-                const arr = [one, two];
-                arr.forEach(el => el.style.background = '#41ff');
-            } else if (currentDirection === 'Y') {
-                const one = el;
-                const onei = Number(el.getAttribute('index'));
-                const twoi = Number(onei + 10);
-                const two = document.querySelector(`[index='${twoi}']`);
-                const arr = [one, two];
-                arr.forEach(el => el.style.background = '#41ff');
-            }
-        }
-    });
-
-    el.addEventListener('mouseleave', () => {
-        if (foo === 'destroyer' || foo === 'submarine') {
-            if (currentDirection === 'X') {
-                const one = el;
-                const two = el.nextElementSibling;
-                const arr = [one, two];
-                arr.forEach(el => {
-                    if (el.style.background = '#41ff') {
-                        el.style.background = '';
-                    }
-                });
-            } else if (currentDirection === 'Y') {
-                const one = el;
-                const onei = Number(el.getAttribute('index'));
-                const twoi = Number(onei + 10);
-                const two = document.querySelector(`[index='${twoi}']`);
-                const arr = [one, two];
-                arr.forEach(el => {
-                    if (el.style.background = '#41ff') {
-                        el.style.background = '';
-                    }
-                });
-            }
-        }
-    });
 });
 
 gridds.forEach(el => {
@@ -813,6 +907,7 @@ gridds.forEach(el => {
         }
     }); 
 });
+
 
 
 directionBtn.addEventListener('click', changeDirection);
