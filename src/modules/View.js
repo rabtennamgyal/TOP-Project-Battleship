@@ -1,6 +1,5 @@
 import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP } from './util/domutil';
 
-// rgb(65, 255, 176)
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
 const Player = require('../modules/factories/playerfactory');
@@ -32,6 +31,7 @@ let foo = 'destroyer';
 let foo2 = 'destroyer';
 let playerOne;
 let playerTwo;
+let turn = 'Player One';
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
@@ -622,6 +622,8 @@ function setShips2(e) {
 function attack(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
+    turn = 'Player Two';
+    console.log('its p2 turn');
 
     if (board[index] !== '') {
         if (grids[index].style.background !== 'red') {
@@ -660,6 +662,8 @@ function attack(e) {
 function attack2(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
+    turn = 'Player One';
+    console.log('its p1 turn');
 
     if (board2[index] !== '') {
         if (gridds[index].style.background !== 'red') {
@@ -1036,7 +1040,7 @@ grids.forEach(el => {
             console.log(board);
         }
 
-        if (foo === 'attack') {
+        if (foo === 'attack' && turn === 'Player One') {
             attack(e);
             checkBoard();
         }
@@ -1342,7 +1346,7 @@ gridds.forEach(el => {
             setShips2(e);
         }
 
-        if (foo2 === 'attack') {
+        if (foo2 === 'attack' && turn === 'Player Two') {
             attack2(e);
             checkBoard2();
         }
@@ -1375,8 +1379,8 @@ p2Btn.addEventListener('click', () => {
     }
 });
 
-
 // Starting game initally
+
 startGame.addEventListener('click', () => {
     // 1. Close the current modal and the intro page
     const intro = document.querySelector('.intro');

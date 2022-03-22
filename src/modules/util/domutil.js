@@ -67,12 +67,14 @@ function changeBasisY(num) {
     }
 };
 
+
 // Open modal to get player's name 
 // function hideIntro() {
 //     const intro = document.querySelector('.intro');
 
 //     intro.style.display = 'none';
 // };
+
 function openModalPvP() {
     pvpModal.style.display = 'grid';
 }
