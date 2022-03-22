@@ -62,11 +62,6 @@ function changeDirection() {
     }
 };
 
-// function changeTurns() {
-
-// };
-
-
 function shipPlacement(e, length) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
@@ -633,6 +628,8 @@ function attack(e) {
         if (grids[index].style.background !== 'red') {
             const shipType = board[index];
             grids[index].style.background = 'red';
+            turn = 'Player Two';
+            console.log('it is p2 turns');
 
             if (shipType === 'destroyer') {
                 destroyer.hit(index);
@@ -658,6 +655,8 @@ function attack(e) {
         }
     } else {
         if (grids[index].style.background !== 'red') {
+            turn = 'Player Two';
+            console.log('it is p2 turns');
             grids[index].style.background = '#fff';
         }
     };
@@ -673,6 +672,8 @@ function attack2(e) {
         if (gridds[index].style.background !== 'red') {
             const shipType = board2[index];
             gridds[index].style.background = 'red';
+            turn = 'Player One';
+            console.log('it is p1 turns');
 
             if (shipType === 'destroyer') {
                 destroyer2.hit(index);
@@ -698,6 +699,8 @@ function attack2(e) {
         }
     } else {
         if (gridds[index].style.background !== 'red') {
+            turn = 'Player One';
+            console.log('it is p1 turns');
             gridds[index].style.background = '#fff';
         }
     };
@@ -1043,7 +1046,7 @@ grids.forEach(el => {
             setShips(e);
         }
 
-        if (foo === 'attack') { //  && turn === 'Player One'
+        if (foo === 'attack' && turn === 'Player One') { 
             attack(e);
             checkBoard();
         }
@@ -1348,7 +1351,7 @@ gridds.forEach(el => {
             setShips2(e);
         }
 
-        if (foo2 === 'attack') { //  && turn === 'Player Two'
+        if (foo2 === 'attack' && turn === 'Player Two') {
             attack2(e);
             checkBoard2();
         }
