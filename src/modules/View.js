@@ -822,10 +822,95 @@ grids.forEach(el => {
                         }
                     });
                 }
-            } 
-            // add battleship (4) and carrier (5).
-        }
-    });
+            } else if (foo === 'battleship') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const four = three.nextElementSibling;
+                    const arr = [one, two, three, four];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = document.querySelector(`[index='${twoi}']`);
+                    const threei = Number(onei + 20);
+                    const three = document.querySelector(`[index='${three}']`);
+                    const fouri = Number(onei + 30);
+                    const four = document.querySelector(`[index='${four}']`);
+                    const arr = [one, two, three, four];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } else if (foo === 'carrier') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const four = three.nextElementSibling;
+                    const five = four.nextElementSibling;
+                    const arr = [one, two, three, four, five];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = document.querySelector(`[index='${twoi}']`);
+                    const threei = Number(onei + 20);
+                    const three = document.querySelector(`[index='${three}']`);
+                    const fouri = Number(onei + 30);
+                    const four = document.querySelector(`[index='${four}']`);
+                    const fivei = Number(onei + 40);
+                    const five = document.querySelector(`[index='${five}']`)
+                    const arr = [one, two, three, four];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            }
+    }});
     // 2. Event Two
     el.addEventListener('mouseout', () => {
         if (foo === 'destroyer' || foo === 'submarine') {
@@ -879,6 +964,69 @@ grids.forEach(el => {
                     }
                 });
             }
+        } else if (foo === 'battleship') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const four = three.nextElementSibling;
+                const arr = [one, two, three, four];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const threei = Number(onei + 20);
+                const three = document.querySelector(`[index='${threei}']`)
+                const fouri = Number(onei + 30);
+                const four = document.querySelector(`[index='${fouri}']`);
+                const arr = [one, two, three, four];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        } else if (foo === 'carrier') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const four = three.nextElementSibling;
+                const five = four.nextElementSibling;
+                const arr = [one, two, three, four, five];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = document.querySelector(`[index='${twoi}']`);
+                const threei = Number(onei + 20);
+                const three = document.querySelector(`[index='${threei}']`)
+                const fouri = Number(onei + 30);
+                const four = document.querySelector(`[index='${fouri}']`);
+                const fivei = Number(onei + 40);
+                const five = document.querySelector(`[index='${fivei}']`);
+                const arr = [one, two, three, four, five];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
         }
     });
     // 3. Event Three
@@ -896,6 +1044,299 @@ grids.forEach(el => {
 });
 
 gridds.forEach(el => {
+    // 1. Event One
+    el.addEventListener('mouseover', () => {
+        if (el.matches(':hover')) {
+            if (foo2 === 'destroyer' || foo2 === 'submarine') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const arr = [one, two];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const arr = [one, two[0]];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } else if (foo2 === 'cruiser') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const arr = [one, two, three];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const threei = Number(onei + 20);
+                    const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+
+                    const arr = [one, two[0], three[0]];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } else if (foo2 === 'battleship') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const four = three.nextElementSibling;
+                    const arr = [one, two, three, four];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const threei = Number(onei + 20);
+                    const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const fouri = Number(onei + 30);
+                    const four = Array.from(Array.from(document.querySelectorAll(`[index='${fouri}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+
+                    const arr = [one, two[0], three[0], four[0]];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            } else if (foo2 === 'carrier') {
+                if (currentDirection === 'X') {
+                    const one = el;
+                    const two = el.nextElementSibling;
+                    const three = two.nextElementSibling;
+                    const four = three.nextElementSibling;
+                    const five = four.nextElementSibling;
+                    const arr = [one, two, three, four, five];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                } else if (currentDirection === 'Y') {
+                    const one = el;
+                    const onei = Number(el.getAttribute('index'));
+                    const twoi = Number(onei + 10);
+                    const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const threei = Number(onei + 20);
+                    const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                    const fouri = Number(onei + 30);
+                    const four = Array.from(Array.from(document.querySelectorAll(`[index='${fouri}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+                    const fivei = Number(onei + 40);
+                    const five = Array.from(Array.from(document.querySelectorAll(`[index='${fivei}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+
+                    const arr = [one, two[0], three[0], four[0], five[0]];
+
+                    if (one.style.background === 'rgb(65, 255, 176)') {
+                        return;
+                    }
+
+                    arr.forEach(el => {
+                        if (el.style.background === 'rgb(65, 255, 176)') {
+                            return;
+                        } else {
+                            el.style.background = 'rgb(68, 17, 255)'
+                        }
+                    });
+                }
+            }
+    }});
+    // 2. Event Two
+    el.addEventListener('mouseout', () => {
+        if (foo2 === 'destroyer' || foo2 === 'submarine') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const arr = [one, two];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const arr = [one, two[0]];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        } else if (foo2 === 'cruiser') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const arr = [one, two, three];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const threei = Number(onei + 20);
+                const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+
+                const arr = [one, two[0], three[0]];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        } else if (foo2 === 'battleship') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const four = three.nextElementSibling;
+                const arr = [one, two, three, four];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const threei = Number(onei + 20);
+                const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const fouri = Number(onei + 30);
+                const four = Array.from(Array.from(document.querySelectorAll(`[index='${fouri}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+
+                const arr = [one, two[0], three[0], four[0]];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        } else if (foo2 === 'carrier') {
+            if (currentDirection === 'X') {
+                const one = el;
+                const two = el.nextElementSibling;
+                const three = two.nextElementSibling;
+                const four = three.nextElementSibling;
+                const five = four.nextElementSibling;
+                const arr = [one, two, three, four, five];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            } else if (currentDirection === 'Y') {
+                const one = el;
+                const onei = Number(el.getAttribute('index'));
+                const twoi = Number(onei + 10);
+                const two = Array.from(document.querySelectorAll(`[index='${twoi}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const threei = Number(onei + 20);
+                const three = Array.from(document.querySelectorAll(`[index='${threei}'], [class='.gridd']`)).filter(el => el.className === 'gridd');
+                const fouri = Number(onei + 30);
+                const four = Array.from(Array.from(document.querySelectorAll(`[index='${fouri}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+                const fivei = Number(onei + 40);
+                const five = Array.from(Array.from(document.querySelectorAll(`[index='${fivei}'], [class='.gridd']`)).filter(el => el.className === 'gridd'));
+
+                const arr = [one, two[0], three[0], four[0], five[0]];
+
+                arr.forEach(el => {
+                    if (el.style.background === 'rgb(68, 17, 255)') {
+                        el.style.background = '';
+                    }
+                });
+            }
+        }
+    });
+
+    // 3. Event Three
     el.addEventListener('click', (e) => {
         if (foo2 !== 'attack') {
             setShips2(e);
