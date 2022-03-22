@@ -16,5 +16,6 @@ also start adding the responsive codes ( mixin ).
 3. Need to make computer logic
 
 
-// 
-last hovering effect of carrier still lingers 
+
+🤷‍♂️ last hovering effect of carrier still lingers.
+🤷‍♂️ pressed dom div changes the turn even if it is already pressed.

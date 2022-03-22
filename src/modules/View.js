@@ -62,6 +62,10 @@ function changeDirection() {
     }
 };
 
+// function changeTurns() {
+
+// };
+
 
 function shipPlacement(e, length) {
     const target = e.target;
@@ -176,7 +180,7 @@ function shipPlacement(e, length) {
 
                 setTimeout(() => {
                     foo = 'attack';
-                    let interval = 50;
+                    let interval = 1;
                     let promise = Promise.resolve();
 
                     grids.forEach(el => {
@@ -300,7 +304,7 @@ function shipPlacement(e, length) {
 
                 setTimeout(() => {
                     foo = 'attack';
-                    let interval = 50;
+                    let interval = 1;
                     let promise = Promise.resolve();
 
                     grids.forEach(el => {
@@ -431,7 +435,7 @@ function shipPlacement2(e, length) {
                 
                 setTimeout(() => {
                     foo2 = 'attack';
-                    let interval = 50;
+                    let interval = 1;
                     let promise = Promise.resolve();
 
                     gridds.forEach(el => {
@@ -555,7 +559,7 @@ function shipPlacement2(e, length) {
 
                 setTimeout(() => {
                     foo2 = 'attack';
-                    let interval = 50;
+                    let interval = 1;
                     let promise = Promise.resolve();
 
                     gridds.forEach(el => {
@@ -622,8 +626,8 @@ function setShips2(e) {
 function attack(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
-    turn = 'Player Two';
-    console.log('its p2 turn');
+    // turn = 'Player Two';
+    // console.log('its p2 turn');
 
     if (board[index] !== '') {
         if (grids[index].style.background !== 'red') {
@@ -662,8 +666,8 @@ function attack(e) {
 function attack2(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
-    turn = 'Player One';
-    console.log('its p1 turn');
+    // turn = 'Player One';
+    // console.log('its p1 turn');
 
     if (board2[index] !== '') {
         if (gridds[index].style.background !== 'red') {
@@ -811,13 +815,13 @@ grids.forEach(el => {
                     const twoi = Number(onei + 10);
                     const two = document.querySelector(`[index='${twoi}']`);
                     const threei = Number(onei + 20);
-                    const three = document.querySelector(`[index='${three}']`);
+                    const three = document.querySelector(`[index='${threei}']`);
                     const arr = [one, two, three];
 
                     if (one.style.background === 'rgb(65, 255, 176)') {
                         return;
                     }
-
+                    console.log('going');
                     arr.forEach(el => {
                         if (el.style.background === 'rgb(65, 255, 176)') {
                             return;
@@ -851,9 +855,9 @@ grids.forEach(el => {
                     const twoi = Number(onei + 10);
                     const two = document.querySelector(`[index='${twoi}']`);
                     const threei = Number(onei + 20);
-                    const three = document.querySelector(`[index='${three}']`);
+                    const three = document.querySelector(`[index='${threei}']`);
                     const fouri = Number(onei + 30);
-                    const four = document.querySelector(`[index='${four}']`);
+                    const four = document.querySelector(`[index='${fouri}']`);
                     const arr = [one, two, three, four];
 
                     if (one.style.background === 'rgb(65, 255, 176)') {
@@ -885,7 +889,7 @@ grids.forEach(el => {
                         if (el.style.background === 'rgb(65, 255, 176)') {
                             return;
                         } else {
-                            el.style.background = 'rgb(68, 17, 255)'
+                            el.style.background = 'rgb(68, 17, 255)';
                         }
                     });
                 } else if (currentDirection === 'Y') {
@@ -894,11 +898,11 @@ grids.forEach(el => {
                     const twoi = Number(onei + 10);
                     const two = document.querySelector(`[index='${twoi}']`);
                     const threei = Number(onei + 20);
-                    const three = document.querySelector(`[index='${three}']`);
+                    const three = document.querySelector(`[index='${threei}']`);
                     const fouri = Number(onei + 30);
-                    const four = document.querySelector(`[index='${four}']`);
+                    const four = document.querySelector(`[index='${fouri}']`);
                     const fivei = Number(onei + 40);
-                    const five = document.querySelector(`[index='${five}']`)
+                    const five = document.querySelector(`[index='${fivei}']`)
                     const arr = [one, two, three, four];
 
                     if (one.style.background === 'rgb(65, 255, 176)') {
@@ -909,7 +913,7 @@ grids.forEach(el => {
                         if (el.style.background === 'rgb(65, 255, 176)') {
                             return;
                         } else {
-                            el.style.background = 'rgb(68, 17, 255)'
+                            el.style.background = 'rgb(68, 17, 255)';
                         }
                     });
                 }
@@ -1037,10 +1041,9 @@ grids.forEach(el => {
     el.addEventListener('click', (e) => {
         if (foo !== 'attack') {
             setShips(e);
-            console.log(board);
         }
 
-        if (foo === 'attack' && turn === 'Player One') {
+        if (foo === 'attack') { //  && turn === 'Player One'
             attack(e);
             checkBoard();
         }
@@ -1187,7 +1190,7 @@ gridds.forEach(el => {
                         if (el.style.background === 'rgb(65, 255, 176)') {
                             return;
                         } else {
-                            el.style.background = 'rgb(68, 17, 255)'
+                            el.style.background = 'rgb(68, 17, 255)';
                         }
                     });
                 } else if (currentDirection === 'Y') {
@@ -1212,7 +1215,7 @@ gridds.forEach(el => {
                         if (el.style.background === 'rgb(65, 255, 176)') {
                             return;
                         } else {
-                            el.style.background = 'rgb(68, 17, 255)'
+                            el.style.background = 'rgb(68, 17, 255)';
                         }
                     });
                 }
@@ -1339,14 +1342,13 @@ gridds.forEach(el => {
             }
         }
     });
-
     // 3. Event Three
     el.addEventListener('click', (e) => {
         if (foo2 !== 'attack') {
             setShips2(e);
         }
 
-        if (foo2 === 'attack' && turn === 'Player Two') {
+        if (foo2 === 'attack') { //  && turn === 'Player Two'
             attack2(e);
             checkBoard2();
         }
