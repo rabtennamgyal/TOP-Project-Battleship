@@ -10,12 +10,8 @@ is submitted, the message won't change to playerOne wins/ playerTwo wins. ( retu
 also start adding the responsive codes ( mixin ).
 
 
-2. Add intructions when playing the game for players. Add hovering effect showing which ships is being placed currently. 
-
-
-3. Need to make computer logic
+2. Need to make computer logic
 
 
 
 🤷‍♂️ last hovering effect of carrier still lingers.
-🤷‍♂️ pressed dom div changes the turn even if it is already pressed.

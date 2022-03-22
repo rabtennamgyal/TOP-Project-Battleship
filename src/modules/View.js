@@ -1,4 +1,4 @@
-import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP } from './util/domutil';
+import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP, notifyPlayers, targetHit, targetMiss } from './util/domutil';
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
@@ -621,15 +621,14 @@ function setShips2(e) {
 function attack(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
-    // turn = 'Player Two';
-    // console.log('its p2 turn');
 
     if (board[index] !== '') {
         if (grids[index].style.background !== 'red') {
             const shipType = board[index];
             grids[index].style.background = 'red';
             turn = 'Player Two';
-            console.log('it is p2 turns');
+            notifyPlayers(turn); // changes turn
+            targetHit();         // create missile hit sound effect
 
             if (shipType === 'destroyer') {
                 destroyer.hit(index);
@@ -656,7 +655,8 @@ function attack(e) {
     } else {
         if (grids[index].style.background !== 'red') {
             turn = 'Player Two';
-            console.log('it is p2 turns');
+            notifyPlayers(turn);
+            targetMiss();
             grids[index].style.background = '#fff';
         }
     };
@@ -665,15 +665,15 @@ function attack(e) {
 function attack2(e) {
     const target = e.target;
     const index = Number(target.getAttribute('index'));
-    // turn = 'Player One';
-    // console.log('its p1 turn');
 
     if (board2[index] !== '') {
         if (gridds[index].style.background !== 'red') {
             const shipType = board2[index];
             gridds[index].style.background = 'red';
             turn = 'Player One';
-            console.log('it is p1 turns');
+            notifyPlayers(turn);
+            targetHit(); 
+            console.log('hitting ??')
 
             if (shipType === 'destroyer') {
                 destroyer2.hit(index);
@@ -700,7 +700,9 @@ function attack2(e) {
     } else {
         if (gridds[index].style.background !== 'red') {
             turn = 'Player One';
-            console.log('it is p1 turns');
+            notifyPlayers(turn);
+            targetMiss();
+            console.log('missing ??')
             gridds[index].style.background = '#fff';
         }
     };

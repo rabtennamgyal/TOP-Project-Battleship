@@ -3,7 +3,6 @@ const gridd = document.querySelectorAll('.gridd');
 // Modal related dom elements
 const pvpModal = document.querySelector('.pvpModal');
 
-
 let count = 0;
 let count2 = 0;
 
@@ -67,6 +66,22 @@ function changeBasisY(num) {
     }
 };
 
+// Notify player's about whose turn is it.
+function notifyPlayers(name) {
+    //const box1 = document.querySelector('.turnOne');
+    const box2 = document.querySelector('.turnTwo');
+    const text = document.createElement('p');
+    text.classList.add('textStyle');
+    text.textContent = `${name}'s turn.`;
+
+    if (box2.firstChild) {
+        while(box2.firstChild) {
+            box2.removeChild(box2.firstChild);
+        };
+    }
+
+    box2.appendChild(text);
+}
 
 // Open modal to get player's name 
 // function hideIntro() {
@@ -74,6 +89,18 @@ function changeBasisY(num) {
 
 //     intro.style.display = 'none';
 // };
+
+// Target hit sound effect
+function targetHit() {
+    const hit = document.getElementById('hit');
+    hit.play();
+};
+
+function targetMiss() {
+    const miss = document.getElementById('miss');
+    miss.play();
+}
+
 
 function openModalPvP() {
     pvpModal.style.display = 'grid';
@@ -83,4 +110,4 @@ function closeModalPvP() {
     pvpModal.style.display = 'none';
 }
 
-export { changeBasisX, changeBasisY, openModalPvP, closeModalPvP };
+export { changeBasisX, changeBasisY, openModalPvP, closeModalPvP, notifyPlayers, targetHit, targetMiss };
