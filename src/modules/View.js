@@ -623,7 +623,8 @@ function attack(e) {
     const index = Number(target.getAttribute('index'));
 
     if (board[index] !== '') {
-        if (grids[index].style.background !== 'red') {
+        if (grids[index].style.background !== 'red' && grids[index].style.background !== 'rgb(255, 255, 255)') {
+            console.log('red')
             const shipType = board[index];
             grids[index].style.background = 'red';
             turn = 'Player Two';
@@ -653,11 +654,12 @@ function attack(e) {
             }
         }
     } else {
-        if (grids[index].style.background !== 'red') {
-            turn = 'Player Two';
+        if (grids[index].style.background !== 'rgb(255, 255, 255)' && grids[index].style.background !== 'red') {
+            turn = 'Player Two'; 
             notifyPlayers(turn);
             targetMiss();
-            grids[index].style.background = '#fff';
+            grids[index].style.background = 'rgb(255, 255, 255)';
+            console.log('called');
         }
     };
 };
@@ -667,13 +669,12 @@ function attack2(e) {
     const index = Number(target.getAttribute('index'));
 
     if (board2[index] !== '') {
-        if (gridds[index].style.background !== 'red') {
+        if (gridds[index].style.background !== 'red' && gridds[index].style !== 'rgb(255, 255, 255)') {
             const shipType = board2[index];
             gridds[index].style.background = 'red';
             turn = 'Player One';
             notifyPlayers(turn);
             targetHit(); 
-            console.log('hitting ??')
 
             if (shipType === 'destroyer') {
                 destroyer2.hit(index);
@@ -698,12 +699,12 @@ function attack2(e) {
             }
         }
     } else {
-        if (gridds[index].style.background !== 'red') {
+        if (gridds[index].style.background !== 'rgb(255, 255, 255)' && gridds[index].style.background !== 'red') { 
             turn = 'Player One';
             notifyPlayers(turn);
             targetMiss();
-            console.log('missing ??')
-            gridds[index].style.background = '#fff';
+            gridds[index].style.background = 'rgb(255, 255, 255)';
+            console.log('called');
         }
     };
 };
