@@ -15,3 +15,5 @@ also start adding the responsive codes ( mixin ).
 
 
 🤷‍♂️ last hovering effect of carrier still lingers.
+
+Fixed the turn logic error, it was the color. I guess the name has to be in rgba value.

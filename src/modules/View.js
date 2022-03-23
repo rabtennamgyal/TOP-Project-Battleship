@@ -624,7 +624,6 @@ function attack(e) {
 
     if (board[index] !== '') {
         if (grids[index].style.background !== 'red' && grids[index].style.background !== 'rgb(255, 255, 255)') {
-            console.log('red')
             const shipType = board[index];
             grids[index].style.background = 'red';
             turn = 'Player Two';
@@ -704,7 +703,6 @@ function attack2(e) {
             notifyPlayers(turn);
             targetMiss();
             gridds[index].style.background = 'rgb(255, 255, 255)';
-            console.log('called');
         }
     };
 };
@@ -1430,6 +1428,9 @@ returnHome.addEventListener('click', () => {
     while (winner.firstChild) {
         winner.removeChild(winner.lastChild);
     };
+
+    // 5. Reset turn back to player one
+    turn = 'Player One';
 });
 
 playAgain.addEventListener('click', () => {
@@ -1462,4 +1463,7 @@ playAgain.addEventListener('click', () => {
     while (winner.firstChild) {
         winner.removeChild(winner.lastChild);
     };
+
+    // 5. Reset turn back to player one
+    turn = 'Player One';
 });
