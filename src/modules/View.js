@@ -727,9 +727,9 @@ function checkBoard() {
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
             if (playerOne) {
-                message.textContent = `${playerOne.name} wins 🏋️‍♀️`;
+                message.textContent = `${playerOne.name} wins 🏋️`;
             } else {
-                message.textContent = 'Player One wins 🏋️‍♀️';
+                message.textContent = 'Player One wins 🏋️';
             }
             winner.appendChild(message);
         }, 2000);
@@ -753,9 +753,9 @@ function checkBoard2() {
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
             if (playerTwo) {
-                message.textContent = `${playerTwo.name} wins 🏋️‍♀️`;
+                message.textContent = `${playerTwo.name} wins 🏋️`;
             } else {
-                message.textContent = 'Player Two wins 🏋️‍♀️';
+                message.textContent = 'Player Two wins 🏋️';
             }
             winner.appendChild(message);
         }, 2000);
