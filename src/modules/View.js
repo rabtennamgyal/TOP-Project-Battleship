@@ -1,4 +1,8 @@
-import { changeBasisX, changeBasisY, openModalPvP, closeModalPvP, notifyPlayers, targetHit, targetMiss } from './util/domutil';
+import { 
+    changeBasisX, changeBasisY, openModalPvP, 
+    closeModalPvP, notifyPlayers, targetHit, targetMiss
+} from './util/domutil';
+
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
@@ -11,7 +15,6 @@ const directionBtn = document.getElementById('changeDirection');
 
 // Intro related dom elements
 const pvpBtn = document.getElementById('pvp');
-const pvcBtn = document.getElementById('pvc');
 // Outro related dom elements
 const returnHome = document.getElementById('returnHome');
 const playAgain = document.getElementById('playAgain');
@@ -46,7 +49,7 @@ const submarine = new Ship('submarine', 2);
 const cruiser = new Ship('cruiser', 3);
 const battleship = new Ship('battleship', 4);
 const carrier = new Ship('carrier', 5);
-// 
+
 const destroyer2 = new Ship('destroyer', 2);
 const submarine2 = new Ship('submarine', 2);
 const cruiser2 = new Ship('cruiser', 3);
@@ -628,7 +631,7 @@ function attack(e) {
             grids[index].style.background = 'red';
             turn = 'Player Two';
             notifyPlayers(turn); // changes turn
-            targetHit();         // create missile hit sound effect
+            targetHit();
 
             if (shipType === 'destroyer') {
                 destroyer.hit(index);
@@ -658,7 +661,6 @@ function attack(e) {
             notifyPlayers(turn);
             targetMiss();
             grids[index].style.background = 'rgb(255, 255, 255)';
-            console.log('called');
         }
     };
 };
@@ -673,7 +675,7 @@ function attack2(e) {
             gridds[index].style.background = 'red';
             turn = 'Player One';
             notifyPlayers(turn);
-            targetHit(); 
+            targetHit();
 
             if (shipType === 'destroyer') {
                 destroyer2.hit(index);
@@ -724,9 +726,13 @@ function checkBoard() {
             outro.style.display = 'grid';
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
-            message.textContent = `${playerOne.name} wins 🏋️‍♀️`;
+            if (playerOne) {
+                message.textContent = `${playerOne.name} wins 🏋️‍♀️`;
+            } else {
+                message.textContent = 'Player One wins 🏋️‍♀️';
+            }
             winner.appendChild(message);
-        });
+        }, 2000);
     };
 };
 
@@ -746,9 +752,13 @@ function checkBoard2() {
             outro.style.display = 'grid';
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
-            message.textContent = `${playerTwo.name} wins 🏋️‍♀️`;
+            if (playerTwo) {
+                message.textContent = `${playerTwo.name} wins 🏋️‍♀️`;
+            } else {
+                message.textContent = 'Player Two wins 🏋️‍♀️';
+            }
             winner.appendChild(message);
-        }, 1000);
+        }, 2000);
     };
 };
 
@@ -1365,7 +1375,6 @@ directionBtn.addEventListener('click', changeDirection);
 
 // starting game, hiding the intro page.
 pvpBtn.addEventListener('click', openModalPvP);
-//             pvcBtn.addEventListener('click', hideIntro); ( player vs computer )
 
 p1Btn.addEventListener('click', () => {
     if (input1.value) {
@@ -1385,8 +1394,8 @@ p2Btn.addEventListener('click', () => {
     }
 });
 
-// Starting game initally
 
+// Starting game initally
 startGame.addEventListener('click', () => {
     // 1. Close the current modal and the intro page
     const intro = document.querySelector('.intro');
@@ -1413,8 +1422,9 @@ returnHome.addEventListener('click', () => {
     gridds.forEach(el => {
         el.style.background = '#22aeff';
         el.classList.remove('popup');
+        el.style.display = 'none';
     });
-    
+
     // 3. Resetting all conditions to start the game again
     newBoard.clearBoard(board);
     newBoard2.clearBoard(board2);

@@ -2,6 +2,7 @@ const grids = document.querySelectorAll('.grid');
 const gridd = document.querySelectorAll('.gridd');
 // Modal related dom elements
 const pvpModal = document.querySelector('.pvpModal');
+const pvcModal = document.querySelector('.pvcModal');
 
 let count = 0;
 let count2 = 0;
@@ -99,15 +100,28 @@ function targetHit() {
 function targetMiss() {
     const miss = document.getElementById('miss');
     miss.play();
-}
+};
 
 
 function openModalPvP() {
     pvpModal.style.display = 'grid';
-}
+};
 
 function closeModalPvP() {
     pvpModal.style.display = 'none';
+};
+
+function openModalPvC() {
+    pvcModal.style.display = 'grid';
+};
+
+function closeModalPvC() {
+    pvcModal.style.display = 'none';
 }
 
-export { changeBasisX, changeBasisY, openModalPvP, closeModalPvP, notifyPlayers, targetHit, targetMiss };
+
+export { 
+    changeBasisX, changeBasisY, openModalPvP, 
+    closeModalPvP, openModalPvC, closeModalPvC, 
+    notifyPlayers, targetHit, targetMiss
+};
