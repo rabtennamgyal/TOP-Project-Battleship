@@ -1,6 +1,6 @@
 import { 
-    changeBasisX, changeBasisY, openModalPvP, 
-    closeModalPvP, notifyPlayers, targetHit, targetMiss
+    changeBasisX, changeBasisY, closeModalPvP, notifyPlayers, 
+    targetHit, targetMiss, showPvP,closePvP
 } from './util/domutil';
 
 
@@ -13,8 +13,6 @@ const grids = document.querySelectorAll('.grid');
 const gridds = document.querySelectorAll('.gridd');
 const directionBtn = document.getElementById('changeDirection');
 
-// Intro related dom elements
-const pvpBtn = document.getElementById('pvp');
 // Outro related dom elements
 const returnHome = document.getElementById('returnHome');
 const playAgain = document.getElementById('playAgain');
@@ -24,7 +22,7 @@ const input2 = document.getElementById('playerTwo');
 const p1Btn = document.getElementById('playerOneBtn');
 const p2Btn = document.getElementById('playerTwoBtn');
 // Starting game 
-const startGame = document.getElementById('playGame');
+const startGame = document.getElementById('playGame'); // player vs player
 
 
 
@@ -64,6 +62,7 @@ function changeDirection() {
         currentDirection = 'X';
     }
 };
+
 
 function shipPlacement(e, length) {
     const target = e.target;
@@ -1373,8 +1372,7 @@ gridds.forEach(el => {
 
 directionBtn.addEventListener('click', changeDirection);
 
-// starting game, hiding the intro page.
-pvpBtn.addEventListener('click', openModalPvP);
+
 
 p1Btn.addEventListener('click', () => {
     if (input1.value) {
@@ -1395,12 +1393,13 @@ p2Btn.addEventListener('click', () => {
 });
 
 
-// Starting game initally
+// Starting game initally player vs player
 startGame.addEventListener('click', () => {
     // 1. Close the current modal and the intro page
     const intro = document.querySelector('.intro');
     intro.style.display = 'none';
     closeModalPvP();   
+    showPvP();
 });
 
 
@@ -1441,6 +1440,9 @@ returnHome.addEventListener('click', () => {
 
     // 5. Reset turn back to player one
     turn = 'Player One';
+
+    // 6. close the pvp & pvc board 
+    closePvP();
 });
 
 playAgain.addEventListener('click', () => {

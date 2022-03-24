@@ -28,15 +28,32 @@
 
         .introTwo {
             display: grid;
+            grid-template-columns: 1fr 1fr;
 
             .introTwoOne {
                 display: grid;
                 place-items: center;
 
-                h1 {
-                    color: #fff;
-                    font-size: 5rem;
+                #pvc {
+                    cursor: pointer;
                     font-family: cursive, monospace, sans-serif;
+                    font-size: 1.5rem;
+                    font-weight: 900;
+                    margin: 0 1rem;
+                    background: #fff;
+                    color: #000;
+                    border: none;
+                    outline: none;
+                    border-radius: 2rem;
+                    height: 4rem;
+                    width: 17rem;
+                    transition: 0.7s ease-in;
+    
+                    &:hover {
+                        color: #fff;
+                        border: .1px solid #fff;
+                        background: #000;
+                    }
                 }
             }
 
@@ -141,6 +158,77 @@
         }
     }
 
+    .outroAI  {
+        display: none;
+        place-items: center;
+        z-index: 1000;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background: #000;
+
+        .outroDiv {
+            border: solid #fff;
+            border-radius: 10px;
+            height: 80%;
+            width: 80%;
+            display: grid;
+            grid-template-columns: 1fr;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+            @include respond(phone) {
+                width: 100%;
+            }
+
+            .outroBtn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button {
+                    background: #fff;
+                    cursor: pointer;
+                    height: 40%;
+                    width: 30%;
+                    margin: 0 5rem;
+                    border-radius: 10rem;
+                    font-size: 3rem;
+                    font-family: cursive, monospace, sans-serif;
+                    color: #000;
+                    transition: 0.7s ease-in-out;
+
+                    @include respond(phone) {
+                        font-size: 1.5rem;
+                        margin: 0 1rem;
+                        height: 20%;
+                        width: 50%;
+                    }
+    
+                    &:hover {
+                        color: #fff;
+                        border: 1px solid #fff;
+                        background: #000;
+                    }
+                }
+            }
+            
+            .declareWinner {
+                display: grid;
+                place-items: center;
+            }
+        }
+
+        .winnerStyle {
+            color: #fff;
+            font-size: 6rem;
+            font-family: cursive, monospace, sans-serif;
+
+            @include respond(phone) {
+                font-size: 3rem;
+            }
+        }
+    }
+
     .pvpModal {
         display: none;
         place-items: center;
@@ -151,6 +239,7 @@
         background: #00000027;
 
         .pvpDiv {
+            position: relative;
             border: 1px solid #fff;
             border-radius: 1rem;
             background: #4fa1ff;
@@ -167,6 +256,24 @@
 
             @include respond(tab) {
                 width: 90%;
+            }
+
+            .closePvP {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0 1rem;
+
+                #closePvP {
+                    cursor: pointer;
+                    color: #fff;
+                    font-size: 3rem;
+                    transition: 0.7s ease-in-out;
+
+                    &:hover {
+                        transform: rotate(360deg);
+                    }
+                }
             }
 
             .playerDiv {
@@ -258,6 +365,142 @@
         }
     }
 
+    .pvcModal {
+        display: none;
+        place-items: center;
+        z-index: 1000;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background: #00000027;
+
+        .pvpDiv {
+            position: relative;
+            border: 1px solid #fff;
+            border-radius: 1rem;
+            background: #4fa1ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+            width: 55%;
+
+            @include respond(phone) {
+                width: 90%;
+            }
+
+            @include respond(tab) {
+                width: 90%;
+            }
+
+            .closePvC {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0 1rem;
+
+                #closePvC {
+                    cursor: pointer;
+                    color: #fff;
+                    font-size: 3rem;
+                    transition: 0.7s ease-in-out;
+
+                    &:hover {
+                        transform: rotate(360deg);
+                    }
+                }
+            }
+
+            .playerDiv {
+                display: grid;
+                grid-template-columns: 85% 15%;
+                justify-content: center;
+                align-items: center;
+                height: 30%;
+                width: 70%;
+
+                @include respond(phone) {
+                    width: 100%;
+                }
+
+                @include respond(tab) {
+                    width: 90%;
+                }
+
+                form {
+                    width: 100%;
+
+                    label {
+                        font-size: 2.2rem;
+                        color: #fff;
+
+                        @include respond(phone) {
+                            font-size: 1.8rem;
+                        }
+
+                        @include respond(tab) {
+                            font-size: 1.8rem;
+                        }
+                    }
+
+                    input {
+                        margin: 0 .5rem;
+                        height: 3rem;
+                        width: 70%;
+                        font-size: 2rem;
+
+                        @include respond(phone) {
+                            width: 60%;
+                        }
+                    }
+                }
+
+                button {
+                    color: #fff;
+                    background: #000;
+                    cursor: pointer;
+                    height: 3rem;
+                    width: 8rem;
+                    border-radius: 10rem;
+                    border: none;
+                    outline: none;
+                    transition: 0.7s ease-in-out;
+
+                    @include respond(phone) {
+                        width: 5rem;
+                        margin: 0;
+                    }
+                    
+                    &:hover {
+                        border: 1px solid #000000;
+                        color: #000;
+                        background: #fff;
+                    }
+                }
+            }
+
+            #playAI {
+                color: #fff;
+                background: #000;
+                cursor: pointer;
+                margin: 0 1rem;
+                height: 3rem;
+                width: 8rem;
+                border-radius: 10rem;
+                border: none;
+                outline: none;
+                transition: 0.7s ease-in-out;
+                
+                &:hover {
+                    border: 1px solid #000000;
+                    color: #000;
+                    background: #fff;
+                }
+            }
+        }
+    }
+
     // 1. 
     .navbar {
         display: grid;
@@ -274,7 +517,7 @@
 
     // 2.
     .mainContent {
-        display: grid;
+        display: none;
         grid-template-columns: 40% 20% 40%;
         height: 100%;
 
@@ -302,6 +545,73 @@
                 }
     
                 .grid, .gridd {
+                    z-index: 100;
+                    cursor: pointer;
+                    border: .1px solid rgb(255, 255, 255);
+                    background: rgb(33, 174, 255);
+                }
+    
+                .popup {
+                    animation: popping .7s;
+                }
+            }
+        }
+
+        .turnTwo {
+            justify-self: center;
+            align-self: center;
+            height: 30%;
+            width: 60%;
+            background: rgb(0, 0, 0);
+            border-radius: 2rem;
+            display: grid;
+            place-items: center;
+
+            @include respond(phone) {
+                //margin-top: 10%;
+                height: 70%;
+            }
+
+            .textStyle {
+                color: #fff;
+                font-size: 1.5rem;
+                font-family: cursive, sans-serif;
+            }
+        }
+    }
+
+    // 2. 2.0
+    .mainContent2 {
+        border: solid #00ffaa;
+        display: none;
+        grid-template-columns: 40% 20% 40%;
+        height: 100%;
+        z-index: 1000;
+
+        @include respond(phone) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 45% 10% 45%;
+        }
+
+        .box {
+            height: 100%;
+            width: 100%;
+    
+            .gameBoard {
+                margin: 3rem auto;
+                height: 90%;
+                width: 90%;
+                display: grid;
+                grid-template-columns: repeat(10, 1fr);
+                grid-template-rows: repeat(10, 1fr);
+
+                @include respond(phone) {
+                    margin: 0;
+                    height: 100%;
+                    width: 100%;
+                }
+    
+                .soloGrid, .aiGrid {
                     z-index: 100;
                     cursor: pointer;
                     border: .1px solid rgb(255, 255, 255);
@@ -366,33 +676,6 @@
             }
         }
     }
-
-    // #boxOne {
-    //     grid-column: 1 / 2;
-
-    //     @include respond(phone) {
-    //         grid-row: 2 / 3;
-    //     }
-    // }
-
-    // #boxTwo {
-    //     grid-column: 2 / 3;
-
-    //     @include respond(phone) {
-    //         grid-column: 1 / 2;
-    //         grid-row: 3 / 4;
-    //     }
-    // }
-
-    // #boxThree {
-    //     grid-column: 1 / 4;
-    //     grid-row: 3 / 3;
-
-    //     @include respond(phone) {
-    //         grid-column: 1 / 2;
-    //         grid-row: 4 / 5;
-    //     }
-    // }
 }
 
 

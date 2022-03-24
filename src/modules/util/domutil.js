@@ -4,6 +4,10 @@ const gridd = document.querySelectorAll('.gridd');
 const pvpModal = document.querySelector('.pvpModal');
 const pvcModal = document.querySelector('.pvcModal');
 
+// show pvp or pvc board 
+const pvpBoard = document.querySelector('.mainContent');
+const pvcBoard = document.querySelector('.mainContent2');
+
 let count = 0;
 let count2 = 0;
 
@@ -117,11 +121,28 @@ function openModalPvC() {
 
 function closeModalPvC() {
     pvcModal.style.display = 'none';
-}
+};
+
+function showPvP() {
+    pvpBoard.style.display = 'grid';
+};
+
+function showPvC() {
+    pvcBoard.style.display = 'grid';
+};
+
+function closePvP() {
+    pvpBoard.style.display = 'none';
+};
+
+function closePvC() {
+    pvcBoard.style.display = 'none';
+};
 
 
 export { 
     changeBasisX, changeBasisY, openModalPvP, 
     closeModalPvP, openModalPvC, closeModalPvC, 
-    notifyPlayers, targetHit, targetMiss
+    notifyPlayers, targetHit, targetMiss, showPvP,
+    showPvC, closePvP, closePvC
 };

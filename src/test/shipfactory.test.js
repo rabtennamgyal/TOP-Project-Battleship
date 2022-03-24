@@ -10,13 +10,3 @@ test('Does it push the number in the array', () => {
     expect(arr).toContain(1);
 });
 
-test('Is the ship sunked ?', () => {
-    const Ship1 = new Ship('destroyer', 3, false);
-    Ship1.hit(1);
-    Ship1.hit(2);
-    Ship1.hit(3);
-    const sunked = Ship1.isSunk();
-
-    expect(sunked).toBe(true);
-});
-
