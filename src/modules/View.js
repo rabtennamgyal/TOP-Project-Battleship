@@ -1,6 +1,6 @@
 import { 
     changeBasisX, changeBasisY, closeModalPvP, notifyPlayers, 
-    targetHit, targetMiss, showPvP,closePvP
+    targetHit, targetMiss, showPvP, closePvP, direction
 } from './util/domutil';
 
 
@@ -27,7 +27,8 @@ const startGame = document.getElementById('playGame'); // player vs player
 
 
 // 🚢🚢🚢 Game Assets are all listed below
-let currentDirection = 'X';
+//let currentDirection = 'X';
+let currentDirection = direction;
 let foo = 'destroyer';
 let foo2 = 'destroyer';
 let playerOne;
@@ -916,7 +917,7 @@ grids.forEach(el => {
                     const four = document.querySelector(`[index='${fouri}']`);
                     const fivei = Number(onei + 40);
                     const five = document.querySelector(`[index='${fivei}']`)
-                    const arr = [one, two, three, four];
+                    const arr = [one, two, three, four, five];
 
                     if (one.style.background === 'rgb(65, 255, 176)') {
                         return;

@@ -1,5 +1,11 @@
+// Player vs Player
 const grids = document.querySelectorAll('.grid');
 const gridd = document.querySelectorAll('.gridd');
+
+// Player vs Computer
+const soloPlayerGrids = document.querySelectorAll('.soloGrid');
+const AIGrids = document.querySelectorAll('.aiGrid');
+
 // Modal related dom elements
 const pvpModal = document.querySelector('.pvpModal');
 const pvcModal = document.querySelector('.pvcModal');
@@ -10,6 +16,9 @@ const pvcBoard = document.querySelector('.mainContent2');
 
 let count = 0;
 let count2 = 0;
+let count3 = 0;
+let count4 = 0;
+let direction = 'X';
 
 // Give all the grids the index attribute starting with 0
 grids.forEach(el => {
@@ -20,7 +29,17 @@ grids.forEach(el => {
 gridd.forEach(el => {
     el.setAttribute('index', count2);
     count2++;
-})
+});
+
+soloPlayerGrids.forEach(el => {
+    el.setAttribute('soloIndex', count3);
+    count3++;
+});
+
+AIGrids.forEach(el => {
+    el.setAttribute('aiIndex', count4);
+    count4++;
+});
 
 // Change the Ship's direction between x-axis and y-axis.
 function changeBasisX(num) {
@@ -88,12 +107,6 @@ function notifyPlayers(name) {
     box2.appendChild(text);
 }
 
-// Open modal to get player's name 
-// function hideIntro() {
-//     const intro = document.querySelector('.intro');
-
-//     intro.style.display = 'none';
-// };
 
 // Target hit sound effect
 function targetHit() {
@@ -144,5 +157,5 @@ export {
     changeBasisX, changeBasisY, openModalPvP, 
     closeModalPvP, openModalPvC, closeModalPvC, 
     notifyPlayers, targetHit, targetMiss, showPvP,
-    showPvC, closePvP, closePvC
+    showPvC, closePvP, closePvC, direction
 };

@@ -568,7 +568,6 @@
             place-items: center;
 
             @include respond(phone) {
-                //margin-top: 10%;
                 height: 70%;
             }
 
@@ -582,7 +581,6 @@
 
     // 2. 2.0
     .mainContent2 {
-        border: solid #00ffaa;
         display: none;
         grid-template-columns: 40% 20% 40%;
         height: 100%;
