@@ -536,7 +536,6 @@ setInterval(() => {
 }, 1000);
 
 
-
 // 5. Attack Function for Player 🐱‍🏍 
 // this function need more work
 
@@ -583,17 +582,28 @@ function computerAttack() {
                 soloPlayerGrids[random].style.background = 'rgb(255, 255, 255)';
             }
         };
-    };
+    } else {
+        computerAttack();
+    }
+
+    console.log(random);
 };
 
 
 // 7. Check the board after every iteration to see if the game is won.
 function checkBoard() {
     let count = 0;
+    let count2 = 0;
 
     soloPlayerGrids.forEach(el => {
         if (el.style.background === 'red') {
             count++;
+        }
+    });
+
+    AIGrids.forEach(el => {
+        if (el.style.background === 'red') {
+            count2++;
         }
     });
 
@@ -606,6 +616,24 @@ function checkBoard() {
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
             content2.style.display = 'none';
+            if (thePlayer) {
+                message.textContent = `${thePlayer.name} wins 🏋️`;
+            } else {
+                message.textContent = 'Player One wins 🏋️';
+            }
+            winner.appendChild(message);
+        }, 2000);
+    };
+
+    if (count2 === 16) {
+        setTimeout(() => {
+            const content2 = document.querySelector('.mainContent2');
+            content2.style.display = 'none';
+            const outro = document.querySelector('.outroAI');
+            outro.style.display = 'grid';
+            const winner = document.querySelector('.declareWinner2');
+            const message = document.createElement('p');
+            message.classList.add('winnerStyle');
             if (thePlayer) {
                 message.textContent = `${thePlayer.name} wins 🏋️`;
             } else {
@@ -911,11 +939,7 @@ soloPlayerGrids.forEach(el => {
         if (foo !== 'attack') {
             setShips(e);
         }
-
-        // if (foo2 === 'attack' && turn === 'Player One') { 
-        //     attack(e);
-        //     checkBoard();
-        // }
+        checkBoard();
     }); 
 });
 
@@ -927,7 +951,7 @@ AIGrids.forEach(el => {
 
             setTimeout(() => {
                 computerAttack();
-            }, 7000);
+            }, 2000);
         }
     });
 });

@@ -16,4 +16,5 @@ also start adding the responsive codes ( mixin ).
 
 
 🤷‍♂️ last hovering effect of carrier still lingers.
-🤷‍♂️ Need to work on the function aiShipPlacement() 
+🤷‍♂️ Need to work on the function aiShipPlacement() !important
+🤷‍♂️ AI takes some time to produce a legal number 
