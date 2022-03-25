@@ -11,9 +11,9 @@ also start adding the responsive codes ( mixin ).
 
 
 2. Need to make computer logic
+   a. Need to make player and computer turn change logic
 
 
 
 🤷‍♂️ last hovering effect of carrier still lingers.
-
-Fixed the turn logic error, it was the color. I guess the name has to be in rgba value.
+🤷‍♂️ Need to work on the function aiShipPlacement() 
