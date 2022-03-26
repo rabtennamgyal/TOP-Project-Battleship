@@ -3,11 +3,9 @@ import {
     targetHit, targetMiss, showPvC, closePvC, direction
 } from './util/domutil';
 
-
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
 const Player = require('../modules/factories/playerfactory');
-
 
 // AI board related dom elements 
 const startGameAI = document.getElementById('playAI');
@@ -33,6 +31,7 @@ const board2 = newBoard2.createBoard();
 let covered2 = [];
 let attacked = []; // arr keep tracks of all the index where the players board has been hit.
 
+// randomPot will need to be set back to the inital value after starting / ending the game.
 
 // player' ship asset
 const destroyer = new Ship('destroyer', 2);
@@ -40,14 +39,6 @@ const submarine = new Ship('submarine', 2);
 const cruiser = new Ship('cruiser', 3);
 const battleship = new Ship('battleship', 4);
 const carrier = new Ship('carrier', 5);
-
-const destroyer2 = new Ship('destroyer', 2);
-const submarine2 = new Ship('submarine', 2);
-const cruiser2 = new Ship('cruiser', 3);
-const battleship2 = new Ship('battleship', 4);
-const carrier2 = new Ship('carrier', 5);
-
-
 
 function changeDirection() {
     if (currentDirection === 'X') {
@@ -77,7 +68,6 @@ soloPlayerBtn.addEventListener('click', () => {
         thePlayer = new Player('Player One');
     }
 });
-
 
 // 3. Function to set the ship on the board 
 function shipPlacement(e, length) {
@@ -396,12 +386,14 @@ function aiShipPlacement() {
     let random = Math.ceil(Math.random() * 99);
     const position = changeBasisX(random);
     const arr = [];
+    console.log(random);
 
     if (!covered2.includes(random) && position + 1 < 10 && position + length <= 10 && foo2 === 'destroyer' || foo2 === 'submarine') {
         const one = random;
         const two = random + 1;
 
-        if (covered.includes(one) || covered.includes(two)) {
+        if (covered2.includes(one) || covered2.includes(two)) {
+            console.log('r1');
             aiShipPlacement();
         } else {
             arr.push(random, random + 1);
@@ -415,6 +407,7 @@ function aiShipPlacement() {
 
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
+                el.style.border = '1px red solid';
             });
 
             if (foo2 === 'destroyer') {
@@ -429,23 +422,25 @@ function aiShipPlacement() {
         const one = random;
         const two = random + 1;
         const three = random + 2;
-
-        if (covered.includes(one) || covered.includes(two) || covered.includes(three)) {
+    
+        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three)) {
+            console.log('r2');
             aiShipPlacement();
         } else {
             arr.push(random, random + 1, random + 2);
             covered2.push(random, random + 1, random + 2);
             const divs = Array.from(AIGrids);
             const curDivs = [];
-
+    
             arr.forEach(el => {
                 curDivs.push(divs[el]);
             });
-
+    
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
+                el.style.border = '1px orange solid';
             });
-
+    
             newBoard2.placeShipX(one, 3, cruiser.name, cruiser.name, cruiser.name);
             foo2 = 'battleship';
         };
@@ -454,23 +449,25 @@ function aiShipPlacement() {
         const two = random + 1;
         const three = random + 2;
         const four = random + 3;
-
-        if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four)) {
+    
+        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four)) {
+            console.log('r3');
             aiShipPlacement();
         } else {
             arr.push(random, random + 1, random + 2, random + 3);
             covered2.push(random, random + 1, random + 2, random + 3);
             const divs = Array.from(AIGrids);
             const curDivs = [];
-
+    
             arr.forEach(el => {
                 curDivs.push(divs[el]);
             });
-
+    
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
+                el.style.border = '1px purple solid';
             });
-
+    
             newBoard2.placeShipX(one, 4, battleship.name, battleship.name, battleship.name, battleship.name);
             foo2 = 'carrier';
         };
@@ -480,29 +477,32 @@ function aiShipPlacement() {
         const three = random + 2;
         const four = random + 3;
         const five = random + 4;
-
-        if (covered.includes(one) || covered.includes(two) || covered.includes(three) || covered.includes(four) || covered.includes(five)) {
+    
+        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four) || covered.includes(five)) {
+            console.log('r4');
             aiShipPlacement();
         } else {
             arr.push(random, random + 1, random + 2, random + 3, random + 4);
             covered2.push(random, random + 1, random + 2, random + 3, random + 4);
             const divs = Array.from(AIGrids);
             const curDivs = [];
-
+    
             arr.forEach(el => {
                 curDivs.push(divs[el]);
             });
-
+    
             curDivs.forEach(el => {
                 el.style.background = '#41ffb0';
+                el.style.border = '1px blue solid';
             });
-
+    
             newBoard2.placeShipX(one, 5, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
             foo2 = '';
             aiBoardFilled = true;
         };
     };
 };
+
 
 
 // 6. Function that call the aiShipPlacement function
@@ -568,12 +568,14 @@ function computerAttack() {
     let random = Math.ceil(Math.random() * 99);
 
     if (!attacked.includes(random)) {
+        attacked.push(random);
         if (board[random] !== '') {
             if (soloPlayerGrids[random].style.background !== 'red' && soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)') {
                 soloPlayerGrids[random].style.background = 'red';
                 //notifyPlayers(turn); // changes turn
                 targetHit();
                 board.splice(random, 1, '');
+            
             }
         } else {
             if (soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)' && soloPlayerGrids[random].style.background !== 'red') {
@@ -584,9 +586,11 @@ function computerAttack() {
         };
     } else {
         computerAttack();
+        console.log('recursion');
     }
 
     console.log(random);
+    console.log(attacked);
 };
 
 
@@ -933,7 +937,6 @@ soloPlayerGrids.forEach(el => {
             }
         }
     });
-
     // 3. Event Three
     el.addEventListener('click', (e) => {
         if (foo !== 'attack') {
@@ -955,3 +958,4 @@ AIGrids.forEach(el => {
         }
     });
 });
+
