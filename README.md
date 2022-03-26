@@ -19,3 +19,11 @@ also start adding the responsive codes ( mixin ).
 🤷‍♂️ Need to work on the function aiShipPlacement() !important
 🤷‍♂️ AI takes some time to produce a legal number 
 🤷‍♂️ make sure that the player is not able to click an already pressed div
+
+
+
+
+// Notes on solved problems :
+1. Realized I don't need to use recursion to make a random number legal. As if a numner isn't correct, then 
+   it will get out of the loop and console log a message. But the problem will be taken care of the while 
+   loop in the setInterval as the boolean won't be true. Maybe it is called again automatically.

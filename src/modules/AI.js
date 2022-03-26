@@ -1,3 +1,4 @@
+import player from '../modules/factories/playerfactory';
 import { 
     changeBasisX, changeBasisY, closeModalPvC, notifyPlayers, 
     targetHit, targetMiss, showPvC, closePvC, direction
@@ -21,6 +22,7 @@ let foo = 'destroyer';
 let foo2 = 'destroyer';
 let turn = 'Player One';
 let aiBoardFilled = false;
+let playing = false;
 
 const newBoard = new gameBoard();
 const board = newBoard.createBoard();
@@ -368,6 +370,7 @@ function setShips(e, length) {
 
     if (foo === 'cruiser') {
         shipPlacement(e, 3);
+        playing = true;
     }
 
     if (foo === 'battleship') {
@@ -388,119 +391,141 @@ function aiShipPlacement() {
     const arr = [];
     console.log(random);
 
-    if (!covered2.includes(random) && position + 1 < 10 && position + length <= 10 && foo2 === 'destroyer' || foo2 === 'submarine') {
-        const one = random;
-        const two = random + 1;
-
-        if (covered2.includes(one) || covered2.includes(two)) {
-            console.log('r1');
-            aiShipPlacement();
-        } else {
-            arr.push(random, random + 1);
-            covered2.push(random, random + 1);
-            const divs = Array.from(AIGrids);
-            const curDivs = [];
-
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-                el.style.border = '1px red solid';
-            });
-
-            if (foo2 === 'destroyer') {
-                newBoard2.placeShipX(one, 2, destroyer.name, destroyer.name);
-                foo2 = 'submarine';
-            } else if (foo2 === 'submarine') {
-                newBoard2.placeShipX(one, 2, submarine.name, submarine.name);
-                foo2 = 'cruiser';
+    if (!covered2.includes(random) && position + 1 <= 10 && foo2 === 'destroyer' || foo2 === 'submarine') {
+        if (position + 2 <= 10) {
+            const one = random;
+            const two = random + 1;
+    
+            if (covered2.includes(one) || covered2.includes(two)) {
+                //console.log('r1');
+                //aiShipPlacement();
+                return;
+            } else {
+                arr.push(random, random + 1);
+                covered2.push(random, random + 1);
+                const divs = Array.from(AIGrids);
+                const curDivs = [];
+    
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+    
+                curDivs.forEach(el => {
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'red';
+                });
+    
+                if (foo2 === 'destroyer') {
+                    newBoard2.placeShipX(one, 2, destroyer.name, destroyer.name);
+                    foo2 = 'submarine';
+                } else if (foo2 === 'submarine') {
+                    newBoard2.placeShipX(one, 2, submarine.name, submarine.name);
+                    foo2 = 'cruiser';
+                }
             }
-        };
-    } else if (!covered2.includes(random) && position + 2 < 10 && position + length <= 10 && foo2 === 'cruiser') {
-        const one = random;
-        const two = random + 1;
-        const three = random + 2;
-    
-        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three)) {
-            console.log('r2');
-            aiShipPlacement();
-        } else {
-            arr.push(random, random + 1, random + 2);
-            covered2.push(random, random + 1, random + 2);
-            const divs = Array.from(AIGrids);
-            const curDivs = [];
-    
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-    
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-                el.style.border = '1px orange solid';
-            });
-    
-            newBoard2.placeShipX(one, 3, cruiser.name, cruiser.name, cruiser.name);
-            foo2 = 'battleship';
-        };
-    } else if (!covered2.includes(random) && position + 3 < 10 && position + length <= 10 && foo2 === 'battleship') {
-        const one = random;
-        const two = random + 1;
-        const three = random + 2;
-        const four = random + 3;
-    
-        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four)) {
-            console.log('r3');
-            aiShipPlacement();
-        } else {
-            arr.push(random, random + 1, random + 2, random + 3);
-            covered2.push(random, random + 1, random + 2, random + 3);
-            const divs = Array.from(AIGrids);
-            const curDivs = [];
-    
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-    
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-                el.style.border = '1px purple solid';
-            });
-    
-            newBoard2.placeShipX(one, 4, battleship.name, battleship.name, battleship.name, battleship.name);
-            foo2 = 'carrier';
-        };
-    } else if (!covered2.includes(random) && position + 4 < 10 && position + length <= 10 && foo2 === 'carrier') {
-        const one = random;
-        const two = random + 1;
-        const three = random + 2;
-        const four = random + 3;
-        const five = random + 4;
-    
-        if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four) || covered.includes(five)) {
-            console.log('r4');
-            aiShipPlacement();
-        } else {
-            arr.push(random, random + 1, random + 2, random + 3, random + 4);
-            covered2.push(random, random + 1, random + 2, random + 3, random + 4);
-            const divs = Array.from(AIGrids);
-            const curDivs = [];
-    
-            arr.forEach(el => {
-                curDivs.push(divs[el]);
-            });
-    
-            curDivs.forEach(el => {
-                el.style.background = '#41ffb0';
-                el.style.border = '1px blue solid';
-            });
-    
-            newBoard2.placeShipX(one, 5, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
-            foo2 = '';
-            aiBoardFilled = true;
-        };
+        } //else {
+            //console.log('ship exceeds 2');
+        //};
+    } else if (!covered2.includes(random) && position + 2 <= 10 && foo2 === 'cruiser') {
+        if (position + 3 <= 10) {
+            const one = random;
+            const two = random + 1;
+            const three = random + 2;
+        
+            if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three)) {
+                return;
+                //console.log('r2');
+                //aiShipPlacement();
+            } else {
+                arr.push(random, random + 1, random + 2);
+                covered2.push(random, random + 1, random + 2);
+                const divs = Array.from(AIGrids);
+                const curDivs = [];
+        
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+        
+                curDivs.forEach(el => {
+                   // el.style.background = '#41ffb0';
+                    el.style.background = 'blue';
+                });
+        
+                newBoard2.placeShipX(one, 3, cruiser.name, cruiser.name, cruiser.name);
+                foo2 = 'battleship';
+            };
+        } //else {
+            //console.log('position exceeds 3');
+        //}
+    } else if (!covered2.includes(random) && position + 3 <= 10 && foo2 === 'battleship') {
+        if (position + 4 <= 10) {
+            const one = random;
+            const two = random + 1;
+            const three = random + 2;
+            const four = random + 3;
+        
+            if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four)) {
+                return;
+                //console.log('r3');
+                //aiShipPlacement();
+            } else {
+                arr.push(random, random + 1, random + 2, random + 3);
+                covered2.push(random, random + 1, random + 2, random + 3);
+                const divs = Array.from(AIGrids);
+                const curDivs = [];
+        
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+        
+                curDivs.forEach(el => {
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'orange';
+                });
+        
+                newBoard2.placeShipX(one, 4, battleship.name, battleship.name, battleship.name, battleship.name);
+                foo2 = 'carrier';
+            };
+        } //else {
+            //console.log('position exceeds 4');
+        //}
+    } else if (!covered2.includes(random) && position + 4 <= 10 && foo2 === 'carrier') {
+        if (position + 5 <= 10) {
+            const one = random;
+            const two = random + 1;
+            const three = random + 2;
+            const four = random + 3;
+            const five = random + 4;
+        
+            if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four) || covered.includes(five)) {
+                return;
+                //console.log('r4');
+                //aiShipPlacement();
+            } else {
+                arr.push(random, random + 1, random + 2, random + 3, random + 4);
+                covered2.push(random, random + 1, random + 2, random + 3, random + 4);
+                const divs = Array.from(AIGrids);
+                const curDivs = [];
+        
+                arr.forEach(el => {
+                    curDivs.push(divs[el]);
+                });
+        
+                curDivs.forEach(el => {
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'purple';
+                });
+        
+                newBoard2.placeShipX(one, 5, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
+                foo2 = '';
+                aiBoardFilled = true;
+            } 
+        } //else {
+            //console.log('position exceeds 5');
+        //}
     };
+
+    console.log(foo2);
 };
 
 
@@ -530,9 +555,11 @@ function setAIShips() {
 
 
 setInterval(() => {
-    while (!aiBoardFilled) {
-        setAIShips();
-    };
+    if (playing) {
+        while (!aiBoardFilled) {
+            setAIShips();
+        };
+    } 
 }, 1000);
 
 
