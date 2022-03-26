@@ -1,4 +1,3 @@
-import player from '../modules/factories/playerfactory';
 import { 
     changeBasisX, changeBasisY, closeModalPvC, notifyPlayers, 
     targetHit, targetMiss, showPvC, closePvC, direction
@@ -32,6 +31,7 @@ const newBoard2 = new gameBoard();
 const board2 = newBoard2.createBoard();
 let covered2 = [];
 let attacked = []; // arr keep tracks of all the index where the players board has been hit.
+let attacked2 = []; // keep track of all the index where the AI board has been hit.
 
 // randomPot will need to be set back to the inital value after starting / ending the game.
 
@@ -370,7 +370,6 @@ function setShips(e, length) {
 
     if (foo === 'cruiser') {
         shipPlacement(e, 3);
-        playing = true;
     }
 
     if (foo === 'battleship') {
@@ -379,12 +378,12 @@ function setShips(e, length) {
 
     if (foo === 'carrier') {
         shipPlacement(e, 5);
+        playing = true;
     }
 };
 
 
 // 5. Function to place ship for AI
-
 function aiShipPlacement() {
     let random = Math.ceil(Math.random() * 99);
     const position = changeBasisX(random);
@@ -596,6 +595,8 @@ function computerAttack() {
 
     if (!attacked.includes(random)) {
         attacked.push(random);
+        console.log(`${random}: random number`, attacked);
+
         if (board[random] !== '') {
             if (soloPlayerGrids[random].style.background !== 'red' && soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)') {
                 soloPlayerGrids[random].style.background = 'red';
@@ -612,12 +613,10 @@ function computerAttack() {
             }
         };
     } else {
+        console.log('recursion', `${random}: random number`);
         computerAttack();
-        console.log('recursion');
-    }
-
-    console.log(random);
-    console.log(attacked);
+        checkBoard();
+    };
 };
 
 
@@ -647,12 +646,9 @@ function checkBoard() {
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
             content2.style.display = 'none';
-            if (thePlayer) {
-                message.textContent = `${thePlayer.name} wins 🏋️`;
-            } else {
-                message.textContent = 'Player One wins 🏋️';
-            }
+            message.textContent = 'Computer wins 🏋️';
             winner.appendChild(message);
+            console.log('Computer wins.');
         }, 2000);
     };
 
@@ -671,6 +667,7 @@ function checkBoard() {
                 message.textContent = 'Player One wins 🏋️';
             }
             winner.appendChild(message);
+            console.log('Player wins');
         }, 2000);
     };
 };
@@ -977,11 +974,19 @@ soloPlayerGrids.forEach(el => {
 AIGrids.forEach(el => {
     el.addEventListener('click', (e) => {
         if (foo === 'attack') {
-            attack(e);
+            const currentIndex = Number(e.target.getAttribute('aiIndex'));
 
-            setTimeout(() => {
-                computerAttack();
-            }, 2000);
+            if (attacked2.includes(currentIndex)) {
+                alert('try again');
+            } else {
+                attack(e);
+                attacked2.push(currentIndex);
+
+                setTimeout(() => {
+                    computerAttack();
+                    checkBoard();
+                }, 2000);    
+            }
         }
     });
 });

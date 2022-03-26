@@ -7,20 +7,10 @@ Below are some issues that I'm working on currently:
 1. May also want to speed up the div changing for each loop up bit ( taking too much time ). Also, when no name
 is submitted, the message won't change to playerOne wins/ playerTwo wins. ( return home -> pvp -> no name -> check ? 🤷‍♂️) 
 
-also start adding the responsive codes ( mixin ).
-
-
-2. Need to make computer logic
-   a. Need to make player and computer turn change logic
-
-
 
 🤷‍♂️ last hovering effect of carrier still lingers.
 🤷‍♂️ Need to work on the function aiShipPlacement() !important
-🤷‍♂️ AI takes some time to produce a legal number 
-🤷‍♂️ make sure that the player is not able to click an already pressed div
-
-
+🤷‍♂️ make sure computer doesn't click on an already pressed div
 
 
 // Notes on solved problems :
