@@ -719,7 +719,7 @@ function checkBoard() {
         }
     });
 
-    if (count === 2) {
+    if (count === 16) {
         setTimeout(() => {
             const outro = document.querySelector('.outro');
             const winner = document.querySelector('.declareWinner');
@@ -753,7 +753,7 @@ function checkBoard2() {
         }
     });
 
-    if (count === 2) {
+    if (count === 16) {
         setTimeout(() => {
             const outro = document.querySelector('.outro');
             const winner = document.querySelector('.declareWinner');
@@ -1438,7 +1438,6 @@ returnHome.addEventListener('click', () => {
     gridds.forEach(el => {
         el.style.background = '#22aeff';
         el.classList.remove('popup');
-        el.style.display = 'none';
     });
 
     // 3. Resetting all conditions to start the game again

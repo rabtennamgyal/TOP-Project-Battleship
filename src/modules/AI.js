@@ -390,7 +390,6 @@ function aiShipPlacement() {
     let random = Math.ceil(Math.random() * 99);
     const position = changeBasisX(random);
     const arr = [];
-    console.log(random);
 
     if (!covered2.includes(random) && position + 1 <= 10 && foo2 === 'destroyer' || foo2 === 'submarine') {
         if (position + 2 <= 10) {
@@ -398,8 +397,6 @@ function aiShipPlacement() {
             const two = random + 1;
     
             if (covered2.includes(one) || covered2.includes(two)) {
-                //console.log('r1');
-                //aiShipPlacement();
                 return;
             } else {
                 arr.push(random, random + 1);
@@ -412,8 +409,8 @@ function aiShipPlacement() {
                 });
     
                 curDivs.forEach(el => {
-                    //el.style.background = '#41ffb0';
-                    el.style.background = 'red';
+                    el.style.background = '#41ffb0';
+                    //el.style.background = 'red';
                 });
     
                 if (foo2 === 'destroyer') {
@@ -424,9 +421,7 @@ function aiShipPlacement() {
                     foo2 = 'cruiser';
                 }
             }
-        } //else {
-            //console.log('ship exceeds 2');
-        //};
+        }
     } else if (!covered2.includes(random) && position + 2 <= 10 && foo2 === 'cruiser') {
         if (position + 3 <= 10) {
             const one = random;
@@ -435,8 +430,6 @@ function aiShipPlacement() {
         
             if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three)) {
                 return;
-                //console.log('r2');
-                //aiShipPlacement();
             } else {
                 arr.push(random, random + 1, random + 2);
                 covered2.push(random, random + 1, random + 2);
@@ -448,16 +441,14 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                   // el.style.background = '#41ffb0';
-                    el.style.background = 'blue';
+                    el.style.background = '#41ffb0';
+                    //el.style.background = 'blue';
                 });
         
                 newBoard2.placeShipX(one, 3, cruiser.name, cruiser.name, cruiser.name);
                 foo2 = 'battleship';
             };
-        } //else {
-            //console.log('position exceeds 3');
-        //}
+        }
     } else if (!covered2.includes(random) && position + 3 <= 10 && foo2 === 'battleship') {
         if (position + 4 <= 10) {
             const one = random;
@@ -467,8 +458,6 @@ function aiShipPlacement() {
         
             if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four)) {
                 return;
-                //console.log('r3');
-                //aiShipPlacement();
             } else {
                 arr.push(random, random + 1, random + 2, random + 3);
                 covered2.push(random, random + 1, random + 2, random + 3);
@@ -480,16 +469,14 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                    //el.style.background = '#41ffb0';
-                    el.style.background = 'orange';
+                    el.style.background = '#41ffb0';
+                    //el.style.background = 'orange';
                 });
         
                 newBoard2.placeShipX(one, 4, battleship.name, battleship.name, battleship.name, battleship.name);
                 foo2 = 'carrier';
             };
-        } //else {
-            //console.log('position exceeds 4');
-        //}
+        }
     } else if (!covered2.includes(random) && position + 4 <= 10 && foo2 === 'carrier') {
         if (position + 5 <= 10) {
             const one = random;
@@ -500,8 +487,6 @@ function aiShipPlacement() {
         
             if (covered2.includes(one) || covered2.includes(two) || covered2.includes(three) || covered2.includes(four) || covered.includes(five)) {
                 return;
-                //console.log('r4');
-                //aiShipPlacement();
             } else {
                 arr.push(random, random + 1, random + 2, random + 3, random + 4);
                 covered2.push(random, random + 1, random + 2, random + 3, random + 4);
@@ -513,20 +498,16 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                    //el.style.background = '#41ffb0';
-                    el.style.background = 'purple';
+                    el.style.background = '#41ffb0';
+                    //el.style.background = 'purple';
                 });
         
                 newBoard2.placeShipX(one, 5, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
                 foo2 = '';
                 aiBoardFilled = true;
             } 
-        } //else {
-            //console.log('position exceeds 5');
-        //}
+        }
     };
-
-    console.log(foo2);
 };
 
 
@@ -601,14 +582,12 @@ function computerAttack() {
         if (board[random] !== '') {
             if (soloPlayerGrids[random].style.background !== 'red' && soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)') {
                 soloPlayerGrids[random].style.background = 'red';
-                //notifyPlayers(turn); // changes turn
                 targetHit();
                 board.splice(random, 1, '');
             
             }
         } else {
             if (soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)' && soloPlayerGrids[random].style.background !== 'red') {
-                //notifyPlayers(turn);
                 targetMiss();
                 soloPlayerGrids[random].style.background = 'rgb(255, 255, 255)';
             }
@@ -637,7 +616,7 @@ function checkBoard() {
         }
     });
 
-    if (count === 2) {
+    if (count === 16) {
         setTimeout(() => {
             closePvC();
             const outro = document.querySelector('.outroAI');
@@ -657,7 +636,7 @@ function checkBoard() {
         }, 2000);
     };
 
-    if (count2 === 2) {
+    if (count2 === 16) {
         setTimeout(() => {
             closePvC(); 
             const outro = document.querySelector('.outroAI');
