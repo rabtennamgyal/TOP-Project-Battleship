@@ -1,5 +1,5 @@
 import { 
-    changeBasisX, changeBasisY, closeModalPvC, notifyPlayers, 
+    changeBasisX, changeBasisY, closeModalPvC, notifyPlayers, clearNotifyBoard,
     targetHit, targetMiss, showPvC, closePvC, direction
 } from './util/domutil';
 
@@ -509,7 +509,6 @@ function aiShipPlacement() {
         }
     };
 };
-
 
 
 // 6. Function that call the aiShipPlacement function
@@ -1024,6 +1023,7 @@ returnHome.addEventListener('click', () => {
     
     // 7.
     closePvC();
+    clearNotifyBoard();
 });
 
 playAgain.addEventListener('click', () => {
@@ -1068,4 +1068,5 @@ playAgain.addEventListener('click', () => {
 
     // 7.
     showPvC();
+    clearNotifyBoard();
 });
