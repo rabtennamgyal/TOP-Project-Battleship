@@ -1,5 +1,5 @@
 import { 
-    changeBasisX, changeBasisY, closeModalPvP, notifyPlayers, 
+    changeBasisX, changeBasisY, closeModalPvP, notifyPlayers, clearNotifyBoard,
     targetHit, targetMiss, showPvP, closePvP, direction
 } from './util/domutil';
 
@@ -719,18 +719,26 @@ function checkBoard() {
         }
     });
 
-    if (count === 16) {
+    if (count === 2) {
         setTimeout(() => {
             const outro = document.querySelector('.outro');
             const winner = document.querySelector('.declareWinner');
             outro.style.display = 'grid';
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
+
+            if (winner.firstChild) {
+                while(winner.firstChild) {
+                    winner.removeChild(winner.firstChild);
+                };
+            };
+
             if (playerOne) {
                 message.textContent = `${playerOne.name} wins 🏋️`;
             } else {
                 message.textContent = 'Player One wins 🏋️';
-            }
+            };
+
             winner.appendChild(message);
         }, 2000);
     };
@@ -745,18 +753,26 @@ function checkBoard2() {
         }
     });
 
-    if (count === 16) {
+    if (count === 2) {
         setTimeout(() => {
             const outro = document.querySelector('.outro');
             const winner = document.querySelector('.declareWinner');
             outro.style.display = 'grid';
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
+
+            if (winner.firstChild) {
+                while(winner.firstChild) {
+                    winner.removeChild(winner.firstChild);
+                };
+            };
+
             if (playerTwo) {
                 message.textContent = `${playerTwo.name} wins 🏋️`;
             } else {
                 message.textContent = 'Player Two wins 🏋️';
             }
+            
             winner.appendChild(message);
         }, 2000);
     };
@@ -1444,6 +1460,7 @@ returnHome.addEventListener('click', () => {
 
     // 6. close the pvp & pvc board 
     closePvP();
+    clearNotifyBoard();
 });
 
 playAgain.addEventListener('click', () => {
@@ -1479,4 +1496,5 @@ playAgain.addEventListener('click', () => {
 
     // 5. Reset turn back to player one
     turn = 'Player One';
+    clearNotifyBoard();
 });

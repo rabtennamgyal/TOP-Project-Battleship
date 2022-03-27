@@ -105,8 +105,17 @@ function notifyPlayers(name) {
     }
 
     box2.appendChild(text);
-}
+};
 
+function clearNotifyBoard() {
+    const box2 = document.querySelector('.turnTwo');
+
+    if (box2.firstChild) {
+        while(box2.firstChild) {
+            box2.removeChild(box2.firstChild);
+        };
+    };
+};
 
 // Target hit sound effect
 function targetHit() {
@@ -156,6 +165,6 @@ function closePvC() {
 export { 
     changeBasisX, changeBasisY, openModalPvP, 
     closeModalPvP, openModalPvC, closeModalPvC, 
-    notifyPlayers, targetHit, targetMiss, showPvP,
-    showPvC, closePvP, closePvC, direction
+    notifyPlayers, clearNotifyBoard, targetHit, targetMiss, 
+    showPvP, showPvC, closePvP, closePvC, direction
 };

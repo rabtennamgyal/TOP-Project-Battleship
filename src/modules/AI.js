@@ -14,6 +14,8 @@ const soloPlayerBtn = document.getElementById('soloPlayerBtn');
 const soloPlayerGrids = document.querySelectorAll('.soloGrid');
 const AIGrids = document.querySelectorAll('.aiGrid');
 const directionBtn = document.getElementById('changeDirection');
+const returnHome = document.getElementById('returnHome2');
+const playAgain = document.getElementById('playAgain2');
 
 let thePlayer;
 let currentDirection = direction;
@@ -595,7 +597,6 @@ function computerAttack() {
 
     if (!attacked.includes(random)) {
         attacked.push(random);
-        console.log(`${random}: random number`, attacked);
 
         if (board[random] !== '') {
             if (soloPlayerGrids[random].style.background !== 'red' && soloPlayerGrids[random].style.background !== 'rgb(255, 255, 255)') {
@@ -613,7 +614,6 @@ function computerAttack() {
             }
         };
     } else {
-        console.log('recursion', `${random}: random number`);
         computerAttack();
         checkBoard();
     };
@@ -637,25 +637,29 @@ function checkBoard() {
         }
     });
 
-    if (count === 16) {
+    if (count === 2) {
         setTimeout(() => {
-            const content2 = document.querySelector('.mainContent2');
+            closePvC();
             const outro = document.querySelector('.outroAI');
             const winner = document.querySelector('.declareWinner2');
             outro.style.display = 'grid';
             const message = document.createElement('p');
             message.classList.add('winnerStyle');
-            content2.style.display = 'none';
             message.textContent = 'Computer wins 🏋️';
+
+            if (winner.firstChild) {
+                while(winner.firstChild) {
+                    winner.removeChild(winner.firstChild);
+                };
+            };
+
             winner.appendChild(message);
-            console.log('Computer wins.');
         }, 2000);
     };
 
-    if (count2 === 16) {
+    if (count2 === 2) {
         setTimeout(() => {
-            const content2 = document.querySelector('.mainContent2');
-            content2.style.display = 'none';
+            closePvC(); 
             const outro = document.querySelector('.outroAI');
             outro.style.display = 'grid';
             const winner = document.querySelector('.declareWinner2');
@@ -665,9 +669,15 @@ function checkBoard() {
                 message.textContent = `${thePlayer.name} wins 🏋️`;
             } else {
                 message.textContent = 'Player One wins 🏋️';
-            }
+            };
+
+            if (winner.firstChild) {
+                while(winner.firstChild) {
+                    winner.removeChild(winner.firstChild);
+                };
+            };
+
             winner.appendChild(message);
-            console.log('Player wins');
         }, 2000);
     };
 };
@@ -991,3 +1001,92 @@ AIGrids.forEach(el => {
     });
 });
 
+
+// Starting over or playing again logic
+returnHome.addEventListener('click', () => {
+    const outro = document.querySelector('.outroAI');
+    const intro = document.querySelector('.intro');
+
+    // 1. Clear the outro and display intro
+    outro.style.display = 'none';
+    intro.style.display = 'grid';
+
+    // 2. Clear the dom and also the dom board array
+    soloPlayerGrids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+
+    AIGrids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+
+    // 3. Resetting all conditions to start the game again
+    newBoard.clearBoard(board);
+    newBoard2.clearBoard(board2);
+    foo = 'destroyer';
+    foo2 = 'destroyer';
+    covered = [];
+    covered2 = [];
+
+    // 4. Reset the winner declaration message in the outro modal
+    const winner = document.querySelector('.declareWinner');
+    while (winner.firstChild) {
+        winner.removeChild(winner.lastChild);
+    };
+    
+    // 5. Reset turn back to player one
+    turn = 'Player One';
+
+    // 6.
+    aiBoardFilled = false;
+    playing = false;
+    
+    // 7.
+    closePvC();
+});
+
+playAgain.addEventListener('click', () => {
+    const outro = document.querySelector('.outroAI');
+
+    // 1. Clear the outro and display intro
+    outro.style.display = 'none';
+
+    // 2. Clear the dom and also the dom board array
+    soloPlayerGrids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+
+    AIGrids.forEach(el => {
+        el.style.background = '#22aeff';
+        el.classList.remove('popup');
+    });
+    
+    // 3. Resetting all conditions to start the game again
+    newBoard.clearBoard(board);
+    newBoard2.clearBoard(board2);
+    foo = 'destroyer';
+    foo2 = 'destroyer';
+    covered = [];
+    covered2 = [];
+    attacked = []; 
+    attacked2 = []; 
+
+    // 4. Reset the winner declaration message in the outro modal
+    const winner = document.querySelector('.declareWinner2');
+    while (winner.firstChild) {
+        winner.removeChild(winner.lastChild);
+    };
+
+    // 5. Reset turn back to player one
+    turn = 'Player One';
+
+    // 6.
+    aiBoardFilled = false;
+    playing = false;
+
+    // 7.
+    showPvC();
+});

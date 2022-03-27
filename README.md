@@ -7,6 +7,10 @@ Below are some issues that I'm working on currently:
 1. May also want to speed up the div changing for each loop up bit ( taking too much time ). Also, when no name
 is submitted, the message won't change to playerOne wins/ playerTwo wins. ( return home -> pvp -> no name -> check ? 🤷‍♂️) 
 
+2. Need to work on final winner declare modal
+
+3. Need to work on player vs player logic after returning or playing again.
+
 
 🤷‍♂️ last hovering effect of carrier still lingers.
 🤷‍♂️ Need to work on the function aiShipPlacement() !important
