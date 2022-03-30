@@ -409,8 +409,8 @@ function aiShipPlacement() {
                 });
     
                 curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                    //el.style.background = 'red';
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'red';
                 });
     
                 if (foo2 === 'destroyer') {
@@ -441,8 +441,8 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                    //el.style.background = 'blue';
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'blue';
                 });
         
                 newBoard2.placeShipX(one, 3, cruiser.name, cruiser.name, cruiser.name);
@@ -469,8 +469,8 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                    //el.style.background = 'orange';
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'orange';
                 });
         
                 newBoard2.placeShipX(one, 4, battleship.name, battleship.name, battleship.name, battleship.name);
@@ -498,8 +498,8 @@ function aiShipPlacement() {
                 });
         
                 curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                    //el.style.background = 'purple';
+                    //el.style.background = '#41ffb0';
+                    el.style.background = 'purple';
                 });
         
                 newBoard2.placeShipX(one, 5, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
