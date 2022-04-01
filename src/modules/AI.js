@@ -2,10 +2,18 @@ import {
     changeBasisX, changeBasisY, closeModalPvC, notifyPlayers, clearNotifyBoard,
     targetHit, targetMiss, showPvC, closePvC, direction
 } from './util/domutil';
+// Ships images
+import ship1 from '../asset/img/ship1.png';
+import ship2 from '../asset/img/ship2.png';
+import ship3 from '../asset/img/ship3.png';
+import ship4 from '../asset/img/ship4.png';
+import ship5 from '../asset/img/ship5.png';
+
 
 const gameBoard = require('../modules/factories/gameboard');
 const Ship = require('../modules/factories/shipfactory');
 const Player = require('../modules/factories/playerfactory');
+
 
 // AI board related dom elements 
 const startGameAI = document.getElementById('playAI');
@@ -99,14 +107,22 @@ function shipPlacement(e, length) {
                     curDivs.push(divs[el]);
                 });
     
-                curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                });
+                // curDivs.forEach(el => {
+                //     el.style.background = '#41ffb0';
+                // });
 
                 if (foo === 'destroyer') {
+                    const img = new Image();
+                    img.src = ship1;
+                    img.classList.add('ship1');
+                    curDivs[0].appendChild(img);    
                     newBoard.placeShipX(soloIndex, length, destroyer.name, destroyer.name);
                     foo = 'submarine';
                 } else if (foo === 'submarine') {
+                    const img = new Image();
+                    img.src = ship2;
+                    img.classList.add('ship2');
+                    curDivs[0].appendChild(img);    
                     newBoard.placeShipX(soloIndex, length, submarine.name, submarine.name);
                     foo = 'cruiser';
                 }
@@ -128,9 +144,14 @@ function shipPlacement(e, length) {
                     curDivs.push(divs[el]);
                 });
     
-                curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                });
+                const img = new Image();
+                img.src = ship3;
+                img.classList.add('ship3');
+                curDivs[0].appendChild(img);    
+                // curDivs.forEach(el => {
+                //     el.style.background = '#41ffb0';
+                // });
+                
 
                 newBoard.placeShipX(soloIndex, length, cruiser.name, cruiser.name, cruiser.name);
                 foo = 'battleship';
@@ -153,9 +174,13 @@ function shipPlacement(e, length) {
                     curDivs.push(divs[el]);
                 });
     
-                curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                });
+                // curDivs.forEach(el => {
+                //     el.style.background = '#41ffb0';
+                // });
+                const img = new Image();
+                img.src = ship4;
+                img.classList.add('ship4');
+                curDivs[0].appendChild(img);   
 
                 newBoard.placeShipX(soloIndex, length, battleship.name, battleship.name, battleship.name, battleship.name);
                 foo = 'carrier';
@@ -179,9 +204,13 @@ function shipPlacement(e, length) {
                     curDivs.push(divs[el]);
                 });
                 
-                curDivs.forEach(el => {
-                    el.style.background = '#41ffb0';
-                });
+                // curDivs.forEach(el => {
+                //     el.style.background = '#41ffb0';
+                // });
+                const img = new Image();
+                img.src = ship5;
+                img.classList.add('ship5');
+                curDivs[0].appendChild(img);   
                 
                 newBoard.placeShipX(soloIndex, length, carrier.name, carrier.name, carrier.name, carrier.name, carrier.name);
 
@@ -192,6 +221,10 @@ function shipPlacement(e, length) {
 
                     soloPlayerGrids.forEach(el => {
                         promise = promise.then(() => {
+                            // const img = new Image();
+                            // img.classList.add('sea');
+                            // img.src = sea;
+                            //el.appendChild(img);
                             el.style.background = '#22aeff';
                             el.classList.add('popup');
                             return new Promise((resolve) => {
@@ -326,18 +359,18 @@ function shipPlacement(e, length) {
 
                 setTimeout(() => {
                     foo = 'attack';
-                    let interval = 1;
-                    let promise = Promise.resolve();
+                    // let interval = 1;
+                    // let promise = Promise.resolve();
 
-                    soloPlayerGrids.forEach(el => {
-                        promise = promise.then(() => {
-                            el.style.background = '#22aeff';
-                            el.classList.add('popup');
-                            return new Promise((resolve) => {
-                                setTimeout(resolve, interval);
-                            });
-                        });
-                    });
+                    // soloPlayerGrids.forEach(el => {
+                    //     promise = promise.then(() => {
+                    //         el.style.background = '#22aeff';
+                    //         el.classList.add('popup');
+                    //         return new Promise((resolve) => {
+                    //             setTimeout(resolve, interval);
+                    //         });
+                    //     });
+                    // });
                 }, 1000);
 
                 setTimeout(() => {
@@ -552,8 +585,8 @@ function attack(e) {
     const aiindex = Number(target.getAttribute('aiindex'));
 
     if (board2[aiindex] !== '') {
-        if (AIGrids[aiindex].style.background !== 'red' && AIGrids[aiindex].style.background !== 'rgb(255, 255, 255)') {
-            AIGrids[aiindex].style.background = 'red';
+        if (AIGrids[aiindex].style.background !== '#41ffb0' && AIGrids[aiindex].style.background !== 'rgb(255, 255, 255)') {
+            AIGrids[aiindex].style.background = '#41ffb0';
             turn = 'Computer';
             notifyPlayers(turn); // changes turn
             targetHit();

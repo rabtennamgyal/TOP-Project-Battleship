@@ -618,10 +618,52 @@
                 }
     
                 .soloGrid, .aiGrid {
+                    overflow: visible;
+                    position: relative;
                     z-index: 100;
                     cursor: pointer;
                     border: .1px solid rgb(255, 255, 255);
-                    background: rgb(33, 174, 255);
+                    //background: rgb(33, 174, 255);
+
+                    .ship1 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3rem;
+                        width: 10rem;
+                    }
+                    
+                    .ship2 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3rem;
+                        width: 10rem;
+                    }
+
+                    .ship3 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3rem;
+                        width: 15rem;
+                    }
+
+                    .ship4 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3rem;
+                        width: 20rem;
+                    }
+
+                    .ship5 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 3rem;
+                        width: 25rem;
+                    }
                 }
     
                 .popup {
